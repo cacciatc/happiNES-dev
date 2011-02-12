@@ -1,3 +1,5 @@
+core/core.jar
+app/pde.jar
 core/bin/
 app/bin/
 build/windows/
