@@ -1,2 +1,2 @@
-HOW TO BUILD ARDUINO ON YOUR FAVORITE PLATFORM
-See: http://code.google.com/p/arduino/wiki/BuildingArduino
+HOW TO BUILD happiNES-dev ON YOUR FAVORITE PLATFORM
+

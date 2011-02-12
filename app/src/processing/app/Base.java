@@ -41,9 +41,9 @@ import processing.core.*;
  * files and images, etc) that comes from that.
  */
 public class Base {
-  public static final int REVISION = 22;
+  public static final int REVISION = 1;
   /** This might be replaced by main() if there's a lib/version.txt file. */
-  static String VERSION_NAME = "0022";
+  static String VERSION_NAME = "0001";
   /** Set true if this a proper release rather than a numbered revision. */
   static public boolean RELEASE = false;
 
@@ -178,7 +178,7 @@ public class Base {
       String mess = e.getMessage();
       if (mess.indexOf("ch.randelshofer.quaqua.QuaquaLookAndFeel") == -1) {
         System.err.println("Non-fatal error while setting the Look & Feel.");
-        System.err.println("The error message follows, however Arduino should run fine.");
+        System.err.println("The error message follows, however happiNES-dev should run fine.");
         System.err.println(mess);
       }
     }
@@ -626,7 +626,7 @@ public class Base {
   public void handleOpenPrompt() {
     // get the frontmost window frame for placing file dialog
     FileDialog fd = new FileDialog(activeEditor,
-                                   "Open an Arduino sketch...",
+                                   "Open a happiNES-dev sketch...",
                                    FileDialog.LOAD);
     // This was annoying people, so disabled it in 0125.
     //fd.setDirectory(Preferences.get("sketchbook.path"));
@@ -770,7 +770,7 @@ public class Base {
           "p { font: 11pt \"Lucida Grande\"; margin-top: 8px }"+
           "</style> </head>" +
           "<b>Are you sure you want to Quit?</b>" +
-          "<p>Closing the last open sketch will quit Arduino.";
+          "<p>Closing the last open sketch will quit happiNES-dev.";
 
         int result = JOptionPane.showOptionDialog(editor,
                                                   prompt,
@@ -1074,7 +1074,7 @@ public class Base {
           } else {
             showWarning("Sketch Does Not Exist",
                         "The selected sketch no longer exists.\n" +
-                        "You may need to restart Arduino to update\n" +
+                        "You may need to restart happiNES-dev to update\n" +
                         "the sketchbook menu.", null);
           }
         }
@@ -1574,7 +1574,7 @@ public class Base {
 
     if (!result) {
       showError("You forgot your sketchbook",
-                "Arduino cannot run because it could not\n" +
+                "happiNES-dev cannot run because it could not\n" +
                 "create a folder to store your sketchbook.", null);
     }
 
@@ -1752,11 +1752,11 @@ public class Base {
 
   static public void showGettingStarted() {
     if (Base.isMacOS()) {
-      Base.showReference("Guide_MacOSX.html");
+      Base.showReference("todo");
     } else if (Base.isWindows()) {
-      Base.showReference("Guide_Windows.html");
+      Base.showReference("todo");
     } else {
-      Base.openURL("http://www.arduino.cc/playground/Learning/Linux");
+      Base.openURL("http://github.com/cacciatc");
     }
   }
 
