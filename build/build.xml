@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="Arduino" default="build">
+<project name="happiNES-dev" default="build">
   
   <!-- Sets properties for macosx/windows/linux depending on current system -->
   <condition property="macosx"><os family="mac" /></condition>
@@ -13,7 +13,7 @@
   <condition property="platform" 
 	     value="linux"><os family="unix" /></condition>
 
-  <!-- Libraries required for running arduino -->
+  <!-- Libraries required for running happiNES-dev -->
   <fileset dir=".." id="runtime.jars">
     <include name="core/core.jar" />
     <include name="app/pde.jar" />
@@ -24,16 +24,16 @@
     <include name="app/lib/ant-launcher.jar" />
   </fileset>
 
-  <target name="build" description="Build Arduino.">
+  <target name="build" description="Build happiNES-dev.">
     <antcall target="${platform}-build" />
   </target>
 
-  <target name="run" description="Run Arduino.">
+  <target name="run" description="Run happiNES-dev.">
     <antcall target="${platform}-run" />
   </target>
 
   <target name="dist" depends="revision-check"
-	  description="Build Arduino for distribution.">
+	  description="Build happiNES-dev for distribution.">
     <input message="Enter version number:" 
 	   addproperty="version"
 	   defaultvalue="${revision}" />
@@ -149,13 +149,13 @@
     <delete dir="macosx/work" />
     <delete dir="macosx/working_dir" />
     <delete dir="macosx/working.dmg" />
-    <delete file="macosx/arduino-*.dmg" />
+    <delete file="macosx/happiNES-dev-*.dmg" />
   </target>
   
   <target name="macosx-checkos" unless="macosx">
     <echo>
       =======================================================
-      Arduino for Mac OS X can only be built on Mac OS X.
+       for Mac OS X can only be built on Mac OS X.
       
       Bye. 
       =======================================================
@@ -172,43 +172,43 @@
     </copy>
     
 <!--    <rename src="macosx/work/template.app" 
-	    dest="macosx/work/Arduino.app" />-->
+	    dest="macosx/work/.app" />-->
     <move file="macosx/work/template.app" 
-	  tofile="macosx/work/Arduino.app" />
+	  tofile="macosx/work/.app" />
 
-    <chmod file="macosx/work/Arduino.app/Contents/MacOS/JavaApplicationStub" perm="755" />
+    <chmod file="macosx/work/.app/Contents/MacOS/JavaApplicationStub" perm="755" />
     
-    <copy todir="macosx/work/Arduino.app/Contents/Resources/Java" flatten="true">
+    <copy todir="macosx/work/.app/Contents/Resources/Java" flatten="true">
       <fileset refid="runtime.jars"/>
     </copy>
     
-    <copy todir="macosx/work/Arduino.app/Contents/Resources/Java">
+    <copy todir="macosx/work/.app/Contents/Resources/Java">
       <fileset dir="shared" includes="lib/**" />
       <fileset file="shared/revisions.txt" />
     </copy>
 
     <!-- Unzip AVR tools -->
-    <!-- <unzip dest="macosx/work/Arduino.app/Contents/Resources/Java/hardware" src="macosx/dist/tools-universal.zip" overwrite="false"/> -->
+    <!-- <unzip dest="macosx/work/.app/Contents/Resources/Java/hardware" src="macosx/dist/tools-universal.zip" overwrite="false"/> -->
 
     <exec executable="unzip">
       <arg value="-q" />
       <arg value="-n" />
       <arg value="-d" />
-      <arg value="macosx/work/Arduino.app/Contents/Resources/Java/hardware" />
+      <arg value="macosx/work/.app/Contents/Resources/Java/hardware" />
       <arg value="macosx/dist/tools-universal.zip" />
     </exec>
 
-    <copy todir="macosx/work/Arduino.app/Contents/Resources/Java/hardware/tools/avr/avr/include/avr">    
+    <copy todir="macosx/work/.app/Contents/Resources/Java/hardware/tools/avr/avr/include/avr">    
       <fileset file="macosx/dist/eeprom.h" />
     </copy>
 
     <antcall target="assemble">
-      <param name="target.path" value="macosx/work/Arduino.app/Contents/Resources/Java" />
+      <param name="target.path" value="macosx/work/.app/Contents/Resources/Java" />
     </antcall>
   </target>
 
   <target name="macosx-run" depends="macosx-build" description="Run Mac OS X version">
-    <exec executable="macosx/work/Arduino.app/Contents/MacOS/JavaApplicationStub" spawn="true"/>
+    <exec executable="macosx/work/.app/Contents/MacOS/JavaApplicationStub" spawn="true"/>
   </target>
 
   <target name="macosx-dist" if="macosx" depends="macosx-build" description="Create a .dmg of the Mac OS X version">
@@ -223,19 +223,19 @@
     
     <copy todir="macosx/working_dir">
       <fileset dir="macosx/work">
-        <exclude name="**/ArduinoTestSuite/**" />
+        <exclude name="**/TestSuite/**" />
       </fileset>
     </copy>
 
     <!-- The ant copy command does not preserve permissions. -->
-    <chmod file="macosx/working_dir/Arduino.app/Contents/MacOS/JavaApplicationStub" perm="+x" />
+    <chmod file="macosx/working_dir/.app/Contents/MacOS/JavaApplicationStub" perm="+x" />
     <chmod perm="+x">
-      <fileset dir="macosx/working_dir/Arduino.app/Contents/Resources/Java/hardware/tools/avr/bin" includes="**/*" />
-      <fileset dir="macosx/working_dir/Arduino.app/Contents/Resources/Java/hardware/tools/avr/avr/bin" includes="**/*" />
-      <fileset dir="macosx/working_dir/Arduino.app/Contents/Resources/Java/hardware/tools/avr/avr-3/bin" includes="**/*" />
-      <fileset dir="macosx/working_dir/Arduino.app/Contents/Resources/Java/hardware/tools/avr/avr-4/bin" includes="**/*" />
-      <fileset dir="macosx/working_dir/Arduino.app/Contents/Resources/Java/hardware/tools/avr/libexec/gcc/avr/3.4.6/" includes="**/cc1*" />
-      <fileset dir="macosx/working_dir/Arduino.app/Contents/Resources/Java/hardware/tools/avr/libexec/gcc/avr/4.3.2/" includes="**/cc1*" />
+      <fileset dir="macosx/working_dir/.app/Contents/Resources/Java/hardware/tools/avr/bin" includes="**/*" />
+      <fileset dir="macosx/working_dir/.app/Contents/Resources/Java/hardware/tools/avr/avr/bin" includes="**/*" />
+      <fileset dir="macosx/working_dir/.app/Contents/Resources/Java/hardware/tools/avr/avr-3/bin" includes="**/*" />
+      <fileset dir="macosx/working_dir/.app/Contents/Resources/Java/hardware/tools/avr/avr-4/bin" includes="**/*" />
+      <fileset dir="macosx/working_dir/.app/Contents/Resources/Java/hardware/tools/avr/libexec/gcc/avr/3.4.6/" includes="**/cc1*" />
+      <fileset dir="macosx/working_dir/.app/Contents/Resources/Java/hardware/tools/avr/libexec/gcc/avr/4.3.2/" includes="**/cc1*" />
     </chmod>
 
     <!-- Pause briefly for the OS to catch up with the DMG changes. 
@@ -249,9 +249,9 @@
       <arg line="detach macosx/working_dir" />
     </exec>
   
-    <delete file="macosx/arduino-*.dmg" />
+    <delete file="macosx/-*.dmg" />
     <exec executable="hdiutil">
-      <arg line="convert macosx/working.dmg -quiet -format UDZO -imagekey zlib-level=9 -o macosx/arduino-${version}.dmg" />
+      <arg line="convert macosx/working.dmg -quiet -format UDZO -imagekey zlib-level=9 -o macosx/-${version}.dmg" />
     </exec>
 
     <!-- Clean up the interim files. -->
@@ -260,9 +260,9 @@
     
     <echo>
       =======================================================
-      Arduino for Mac OS X was built. Grab the image from   
+       for Mac OS X was built. Grab the image from   
       
-      macosx/arduino-${version}.dmg
+      macosx/-${version}.dmg
       =======================================================
     </echo>
   </target>
@@ -279,7 +279,7 @@
   <target name="linux-checkos" unless="linux">
     <echo>
       =======================================================
-      Arduino for Linux can only be built on on unix systems.
+       for Linux can only be built on on unix systems.
       
       Bye. 
       =======================================================
@@ -314,13 +314,13 @@
 
     <chmod perm="755" file="linux/work/hardware/tools/avrdude" />
 
-    <copy todir="linux/work" file="linux/dist/arduino" />
-    <chmod perm="755" file="linux/work/arduino" />
+    <copy todir="linux/work" file="linux/dist/" />
+    <chmod perm="755" file="linux/work/" />
   </target>
   
   <target name="linux-run" depends="linux-build" 
 	  description="Run Linux version">
-    <exec executable="./linux/work/arduino" spawn="false"/>
+    <exec executable="./linux/work/" spawn="false"/>
   </target>
   
   <target name="linux-dist" depends="linux-build" 
@@ -336,25 +336,25 @@
 
 <!--
     <tar compression="gzip" basedir="linux/work" 
-	 destfile="linux/arduino-${version}.tgz" />
+	 destfile="linux/-${version}.tgz" />
 -->
-    <tar compression="gzip" destfile="linux/arduino-${version}.tgz">
+    <tar compression="gzip" destfile="linux/-${version}.tgz">
       <tarfileset dir="linux/work" 
-		  prefix="arduino-${version}" 
-		  excludes="arduino, 
+		  prefix="-${version}" 
+		  excludes=", 
 			    hardware/tools/avrdude,
 			    java/**"
 		  /> 
-      <tarfileset file="linux/work/arduino" filemode="755" prefix="arduino-${version}" />
+      <tarfileset file="linux/work/" filemode="755" prefix="-${version}" />
       <tarfileset file="linux/work/hardware/tools/avrdude" filemode="755" 
-		  prefix="arduino-${version}/hardware/tools" />
+		  prefix="-${version}/hardware/tools" />
     </tar>
 
     <echo>
       =======================================================
-      Arduino for Linux was built. Grab the archive from   
+       for Linux was built. Grab the archive from   
       
-      build/linux/arduino-${version}.tgz
+      build/linux/-${version}.tgz
       =======================================================
     </echo>
   </target>
@@ -372,7 +372,7 @@
   <target name="windows-checkos" unless="windows">
     <echo>
       =======================================================
-      Arduino for Windows can only be built on windows.
+       for Windows can only be built on windows.
       
       Bye. 
       =======================================================
@@ -437,7 +437,7 @@
   
   <target name="windows-run" depends="windows-build" 
 	  description="Run windows version">
-    <exec executable="windows/work/arduino.exe" 
+    <exec executable="windows/work/.exe" 
 	  dir="windows/work" spawn="true"/>
   </target>
 
@@ -452,31 +452,31 @@
 
     <!--
     <zip basedir="windows/work" 
-	 prefix="arduino-${version}"
-	 destfile="windows/arduino-${version}.zip" />
+	 prefix="-${version}"
+	 destfile="windows/-${version}.zip" />
     <zip basedir="windows/work" 
-	 prefix="arduino-${version}"
-	 destfile="windows/arduino-${version}-expert.zip" 
+	 prefix="-${version}"
+	 destfile="windows/-${version}-expert.zip" 
 	 excludes="java/**" />
     -->
 
-    <zip destfile="windows/arduino-${version}.zip">
+    <zip destfile="windows/-${version}.zip">
       <zipfileset dir="windows/work" 
-		  prefix="arduino-${version}" />
+		  prefix="-${version}" />
     </zip>
 
-    <zip destfile="windows/arduino-${version}-expert.zip">
+    <zip destfile="windows/-${version}-expert.zip">
       <zipfileset dir="windows/work" 
-		  prefix="arduino-${version}" 
+		  prefix="-${version}" 
 		  excludes="java/**" />
     </zip>
     
     <echo>
       =======================================================
-      Arduino for Windows was built. Grab the archive from   
+       for Windows was built. Grab the archive from   
       
-      windows/arduino-${version}.zip
-      windows/arduino-${version}-expert.zip
+      windows/-${version}.zip
+      windows/-${version}-expert.zip
       =======================================================
     </echo>
   </target>
@@ -492,9 +492,9 @@
 	   addproperty="version"
 	   defaultvalue="${revision}" />
 
-    <tar compression="gzip" destfile="arduino-${version}-src.tar.gz">
+    <tar compression="gzip" destfile="-${version}-src.tar.gz">
       <tarfileset dir="../" 
-		  prefix="arduino-${version}" 
+		  prefix="-${version}" 
 		  excludes="**/*.tgz,
 			     **/macosx/,
 			     **/windows/,
@@ -506,9 +506,9 @@
 
     <echo>
       =======================================================
-      Arduino source distribution was built. Grab the archive from   
+       source distribution was built. Grab the archive from   
       
-      arduino-${version}-src.tar.gz
+      -${version}-src.tar.gz
       =======================================================
     </echo>
   </target>
