@@ -84,6 +84,11 @@
     <copy todir="${target.path}/hardware">
       <fileset dir="../hardware" />
     </copy>
+  	
+    <!-- copy tools folder -->
+    <copy todir="${target.path}/tools">
+      <fileset dir="../tools" />
+    </copy>
     
     <!-- copy shared examples folder -->
     <copy todir="${target.path}/examples">
@@ -236,6 +241,8 @@
       <fileset dir="macosx/working_dir/.app/Contents/Resources/Java/hardware/tools/avr/avr-4/bin" includes="**/*" />
       <fileset dir="macosx/working_dir/.app/Contents/Resources/Java/hardware/tools/avr/libexec/gcc/avr/3.4.6/" includes="**/cc1*" />
       <fileset dir="macosx/working_dir/.app/Contents/Resources/Java/hardware/tools/avr/libexec/gcc/avr/4.3.2/" includes="**/cc1*" />
+    	
+      <fileset dir="macosx/working_dir/.app/Contents/Resources/Java/hardware/tools/" includes="**/*" />
     </chmod>
 
     <!-- Pause briefly for the OS to catch up with the DMG changes. 
@@ -310,6 +317,10 @@
 
     <copy todir="linux/work/hardware">
       <fileset dir="linux/dist" includes="tools/**" />
+    </copy>
+  	
+    <copy todir="linux/work/tools">
+      <fileset dir="linux/dist" includes="**" />
     </copy>
 
     <chmod perm="755" file="linux/work/hardware/tools/avrdude" />
