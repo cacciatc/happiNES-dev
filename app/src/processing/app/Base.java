@@ -1519,6 +1519,10 @@ public class Base {
     }  
   }
   
+  static public String getAssemblerPath() {
+	      return getContentFile("tools").getAbsolutePath() + File.separator + "assembler" + File.separator;
+  }
+  
   
   static public Target getTarget() {
     return Base.targetsTable.get(Preferences.get("target"));

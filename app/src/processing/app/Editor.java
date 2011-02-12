@@ -602,7 +602,7 @@ public class Editor extends JFrame implements RunnerListener {
     JMenuItem item;
     sketchMenu = new JMenu("Sketch");
 
-    item = newJMenuItem("Verify / Compile", 'R');
+    item = newJMenuItem("Assemble", 'R');
     item.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
           handleRun(false);
@@ -1825,13 +1825,13 @@ public class Editor extends JFrame implements RunnerListener {
     new Thread(verbose ? presentHandler : runHandler).start();
   }
 
-  // DAM: in Arduino, this is compile
+  // DAM: in happiNES-dev, this is assemble
   class DefaultRunHandler implements Runnable {
     public void run() {
       try {
         sketch.prepare();
-        String appletClassName = sketch.build(false);
-        statusNotice("Done compiling.");
+        sketch.build(false);
+        statusNotice("Done assembling.");
       } catch (Exception e) {
         statusError(e);
       }

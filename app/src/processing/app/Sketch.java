@@ -25,6 +25,7 @@ package processing.app;
 
 import processing.app.debug.AvrdudeUploader;
 import processing.app.debug.Compiler;
+import processing.app.debug.Assembler;
 import processing.app.debug.RunnerException;
 import processing.app.debug.Sizer;
 import processing.app.debug.Uploader;
@@ -1258,7 +1259,7 @@ public class Sketch {
     // 1. concatenate all .pde files to the 'main' pde
     //    store line number for starting point of each code bit
 
-    StringBuffer bigCode = new StringBuffer();
+    /*StringBuffer bigCode = new StringBuffer();
     int bigCount = 0;
     for (SketchCode sc : code) {
       if (sc.isExtension("pde")) {
@@ -1267,13 +1268,13 @@ public class Sketch {
         bigCode.append('\n');
         bigCount += sc.getLineCount();
       }
-    }
+    }*/
 
     // Note that the headerOffset isn't applied until compile and run, because
     // it only applies to the code after it's been written to the .java file.
-    int headerOffset = 0;
+    //int headerOffset = 0;
     //PdePreprocessor preprocessor = new PdePreprocessor();
-    try {
+    /*try {
       headerOffset = preprocessor.writePrefix(bigCode.toString(),
                                               buildPath,
                                               name,
@@ -1282,14 +1283,14 @@ public class Sketch {
       fnfe.printStackTrace();
       String msg = "Build folder disappeared or could not be written";
       throw new RunnerException(msg);
-    }
+    }*/
 
     // 2. run preproc on that code using the sugg class name
     //    to create a single .java file and write to buildpath
 
-    String primaryClassName = null;
+   // String primaryClassName = null;
 
-    try {
+   /* try {
       // if (i != 0) preproc will fail if a pde file is not
       // java mode, since that's required
       String className = preprocessor.write();
@@ -1304,12 +1305,12 @@ public class Sketch {
 
 //      } else {
 //        code[0].setPreprocName(className + ".java");
-      }
+      } */
 
       // store this for the compiler and the runtime
-      primaryClassName = className + ".cpp";
+    //  primaryClassName = className + ".cpp";
 
-    } catch (FileNotFoundException fnfe) {
+    /*} catch (FileNotFoundException fnfe) {
       fnfe.printStackTrace();
       String msg = "Build folder disappeared or could not be written";
       throw new RunnerException(msg);
@@ -1323,11 +1324,11 @@ public class Sketch {
       System.err.println("Uncaught exception type:" + ex.getClass());
       ex.printStackTrace();
       throw new RunnerException(ex.toString());
-    }
+    }*/
 
     // grab the imports from the code just preproc'd
 
-    importedLibraries = new ArrayList<File>();
+    /*importedLibraries = new ArrayList<File>();
 
     for (String item : preprocessor.getExtraImports()) {
       File libFolder = (File) Base.importToLibraryTable.get(item);
@@ -1337,11 +1338,23 @@ public class Sketch {
         //classPath += Compiler.contentsToClassPath(libFolder);
         libraryPath += File.pathSeparator + libFolder.getAbsolutePath();
       }
-    }
+    }*/
 
     // 3. then loop over the code[] and save each .java file
 
-    for (SketchCode sc : code) {
+    for(SketchCode sc : code) {
+    	if (sc.isExtension("pde") || sc.isExtension("p65")){
+    		String filename = sc.getFileName();
+    		try {
+    	    	Base.saveFile(sc.getProgram(), new File(buildPath, filename));
+    	    } catch (IOException e) {
+    	    	e.printStackTrace();
+    	    	throw new RunnerException("Problem moving " + filename +
+    	                                    " to the build folder");
+    	    }
+    	}
+    }
+    /*for (SketchCode sc : code) {
       if (sc.isExtension("c") || sc.isExtension("cpp") || sc.isExtension("h")) {
         // no pre-processing services necessary for java files
         // just write the the contents of 'program' to a .java file
@@ -1361,8 +1374,9 @@ public class Sketch {
         // The compiler and runner will need this to have a proper offset
         sc.addPreprocOffset(headerOffset);
       }
-    }
-    return primaryClassName;
+    }*/
+    // return primaryClassName;
+  	return "";
   }
 
 
@@ -1495,7 +1509,7 @@ public class Sketch {
 
 
   /**
-   * Preprocess and compile all the code for this sketch.
+   * Pre-process and assembler all the code for this sketch.
    *
    * In an advanced program, the returned class name could be different,
    * which is why the className is set based on the return value.
@@ -1507,14 +1521,16 @@ public class Sketch {
     throws RunnerException {
     
     // run the preprocessor
+	// cacciatc: remove for now, don't think we will need to preprocess since all the asm files make dependencies explicit.
     String primaryClassName = preprocess(buildPath);
 
     // compile the program. errors will happen as a RunnerException
     // that will bubble up to whomever called build().
-    Compiler compiler = new Compiler();
-    if (compiler.compile(this, buildPath, primaryClassName, verbose)) {
-      size(buildPath, primaryClassName);
-      return primaryClassName;
+    Assembler assemble = new Assembler();
+    if (assemble.assemble(this, buildPath, verbose)) {
+      // size(buildPath, primaryClassName);
+      // return primaryClassName;
+    	return "";
     }
     return null;
   }
@@ -1799,7 +1815,7 @@ public class Sketch {
    * Returns a String[] array of proper extensions.
    */
   public String[] getExtensions() {
-    return new String[] { "pde", "c", "cpp", "h" };
+    return new String[] { "pde", "p65"};
   }
 
 
