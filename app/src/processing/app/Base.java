@@ -1523,6 +1523,10 @@ public class Base {
 	      return getContentFile("tools").getAbsolutePath() + File.separator + "assembler" + File.separator;
   }
   
+  static public String getEmulatorPath(){
+	  return getContentFile("tools").getAbsolutePath() + File.separator + "vNES" + File.separator;
+  }
+  
   
   static public Target getTarget() {
     return Base.targetsTable.get(Preferences.get("target"));
@@ -1537,6 +1541,16 @@ public class Base {
     map = (Map) map.get(Preferences.get("board"));
     if (map == null) return new LinkedHashMap();
     return map;
+  }
+  
+  static public Map<String, String> getEmulatorPreferences() {
+	Target target = getTarget();
+	if (target == null) return new LinkedHashMap();
+	Map map = target.getBoards();
+	if (map == null) return new LinkedHashMap();
+	map = (Map) map.get(Preferences.get("emulator"));
+	if (map == null) return new LinkedHashMap();
+	return map;
   }
   
 

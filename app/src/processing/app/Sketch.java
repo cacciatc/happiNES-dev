@@ -23,14 +23,16 @@
 
 package processing.app;
 
+import processing.app.debug.Assembler;
 import processing.app.debug.AvrdudeUploader;
 import processing.app.debug.Compiler;
-import processing.app.debug.Assembler;
+import processing.app.debug.Emulator;
 import processing.app.debug.RunnerException;
 import processing.app.debug.Sizer;
 import processing.app.debug.Uploader;
 import processing.app.preproc.*;
 import processing.core.*;
+
 
 import java.awt.*;
 import java.awt.event.*;
@@ -1521,15 +1523,21 @@ public class Sketch {
     throws RunnerException {
     
     // run the preprocessor
-	// cacciatc: remove for now, don't think we will need to preprocess since all the asm files make dependencies explicit.
+	// this copies files for us (no real pre-processing per se for now)
     String primaryClassName = preprocess(buildPath);
 
-    // compile the program. errors will happen as a RunnerException
-    // that will bubble up to whomever called build().
+    // assemble the program. errors will happen as a RunnerException that will bubble up to whomever called build().
     Assembler assemble = new Assembler();
+    Emulator emulate = new Emulator();
     if (assemble.assemble(this, buildPath, verbose)) {
       // size(buildPath, primaryClassName);
       // return primaryClassName;
+    	if(assemble.getBinaryPath() == ""){
+    		throw new RunnerException("NES binary was not generated!");
+    	}
+    	if(emulate.emulate(this,buildPath,assemble.getBinaryPath(), verbose)){
+    		return "";
+    	}
     	return "";
     }
     return null;
