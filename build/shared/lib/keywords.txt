@@ -1,178 +1,131 @@
-# LITERAL1 specifies constants
+#pragmas, currently they don't include the '.' at the beginning because it does not render correctly
+advance	LITERAL1	
+.advance	LITERAL2	Advance
+alias	LITERAL1	
+ascii	LITERAL1	
+byte	LITERAL1	
+checkpc	LITERAL1	
+code	LITERAL1	
+data	LITERAL1	
+incbin LITERAL1	
+include	LITERAL1	
+link	LITERAL1	
+org	LITERAL1	
+segment	LITERAL1	
+space	LITERAL1	
+text	LITERAL1	
+word	LITERAL1
 
-HIGH	LITERAL1	Constants
-LOW	LITERAL1	Constants
-INPUT	LITERAL1	Constants
-OUTPUT	LITERAL1	Constants
-DEC	LITERAL1	Serial_Print
-BIN	LITERAL1	Serial_Print
-HEX	LITERAL1	Serial_Print
-OCT	LITERAL1	Serial_Print
-BYTE	LITERAL1	Serial_Print
-PI	LITERAL1
-HALF_PI	LITERAL1
-TWO_PI	LITERAL1
-LSBFIRST	LITERAL1	ShiftOut
-MSBFIRST	LITERAL1	ShiftOut
-CHANGE	LITERAL1	AttachInterrupt
-FALLING	LITERAL1	AttachInterrupt
-RISING	LITERAL1	AttachInterrupt
-DEFAULT	LITERAL1	AnalogReference
-EXTERNAL	LITERAL1	AnalogReference
-INTERNAL	LITERAL1	AnalogReference
-INTERNAL1V1	LITERAL1	AnalogReference
-INTERNAL2V56	LITERAL1	AnalogReference
-
-# KEYWORD1 specifies datatypes and C/C++ keywords
-
-boolean	KEYWORD1	BooleanVariables
-break	KEYWORD1	Break
-byte	KEYWORD1	Byte
-case	KEYWORD1	SwitchCase
-char	KEYWORD1	Char
-class	KEYWORD1
-continue	KEYWORD1	Continue
-default	KEYWORD1	SwitchCase	
-do	KEYWORD1	DoWhile
-double	KEYWORD1	Double
-else	KEYWORD1	Else
-false	KEYWORD1	Constants
-float	KEYWORD1	Float
-for	KEYWORD1	For
-if	KEYWORD1	If
-int	KEYWORD1	Int
-long	KEYWORD1	Long
-new	KEYWORD1	
-null	KEYWORD1	
-private	KEYWORD1
-protected	KEYWORD1	
-public	KEYWORD1	
-return	KEYWORD1	Return	
-short	KEYWORD1
-signed	KEYWORD1
-static	KEYWORD1	Static
-String	KEYWORD1	String	
-switch	KEYWORD1	SwitchCase
-this	KEYWORD1	
-throw	KEYWORD1	
-try	KEYWORD1	
-true	KEYWORD1	
-unsigned	KEYWORD1
-void	KEYWORD1	Void
-while	KEYWORD1	While
-word	KEYWORD1	Word
-
-# operators aren't highlighted, but may have documentation
-
-+=		IncrementCompound
-+		Arithmetic
-[]		arrayaccess
-=		assign
-&		BitwiseAnd
-|		BitwiseAnd
-,		
-//		Comments
-?:		
-{}		Braces
---		Increment
-/		Arithmetic
-/*		Comments
-.		dot
-==		
-<		greaterthan
-<=		greaterthanorequalto
-++		Increment
-!=		inequality
-<<		Bitshift
-<		lessthan
-<=		lessthanorequalto
-&&		Boolean
-!		Boolean
-||		Boolean
--		Arithmetic
-%		Modulo
-*		Arithmetic
-()		parentheses
->>		Bitshift
-;		SemiColon
--=		IncrementCompound
-
-# these are datatypes, but we've also defined functions to cast to them
-
-boolean	KEYWORD2	boolean_
-byte	KEYWORD2	byte_
-char	KEYWORD2	char_
-float	KEYWORD2	float_
-int	KEYWORD2	int_
-long	KEYWORD2	long_
-word	KEYWORD2	word_
-
-# KEYWORD2 specifies methods and functions
-
-abs	KEYWORD2	Abs
-acos	KEYWORD2	ACos
-asin	KEYWORD2	ASin
-atan	KEYWORD2	ATan
-atan2	KEYWORD2	ATan2
-ceil	KEYWORD2	Ceil
-constrain	KEYWORD2	Constrain
-cos	KEYWORD2	Cos
-degrees	KEYWORD2
-exp	KEYWORD2	Exp
-floor	KEYWORD2	Floor
-log	KEYWORD2	Log
-map	KEYWORD2	Map
-max	KEYWORD2	Max
-min	KEYWORD2	Min
-radians	KEYWORD2
-random	KEYWORD2	Random
-randomSeed	KEYWORD2	RandomSeed
-round	KEYWORD2
-sin	KEYWORD2	Sin
-sq	KEYWORD2	Sq
-sqrt	KEYWORD2	Sqrt
-tan	KEYWORD2	Tan
-
-bitRead	KEYWORD2	BitRead
-bitWrite	KEYWORD2	BitWrite
-bitSet	KEYWORD2	BitSet
-bitClear	KEYWORD2	BitClear
-bit	KEYWORD2	Bit
-highByte	KEYWORD2	HighByte
-lowByte	KEYWORD2	LowByte
-
-analogReference	KEYWORD2	AnalogReference
-analogRead	KEYWORD2	AnalogRead
-analogWrite	KEYWORD2	AnalogWrite
-attachInterrupt	KEYWORD2	AttachInterrupt
-detachInterrupt	KEYWORD2	DetachInterrupt
-delay	KEYWORD2	Delay
-delayMicroseconds	KEYWORD2	DelayMicroseconds
-digitalWrite	KEYWORD2	DigitalWrite
-digitalRead	KEYWORD2	DigitalRead
-interrupts	KEYWORD2
-millis	KEYWORD2	Millis
-micros	KEYWORD2	Micros
-noInterrupts	KEYWORD2	NoInterrupts
-noTone	KEYWORD2	NoTone
-pinMode	KEYWORD2	PinMode
-pulseIn	KEYWORD2	PulseIn
-shiftIn	KEYWORD2	ShiftIn
-shiftOut	KEYWORD2	ShiftOut
-tone	KEYWORD2	Tone
-
-Serial	KEYWORD3	Serial
-Serial1	KEYWORD3	Serial
-Serial2	KEYWORD3	Serial
-Serial3	KEYWORD3	Serial
-begin	KEYWORD2	Serial_Begin
-end	KEYWORD2	Serial_End
-peek	KEYWORD2	Serial_Peek
-read	KEYWORD2	Serial_Read
-print	KEYWORD2	Serial_Print
-println	KEYWORD2	Serial_Println
-available	KEYWORD2	Serial_Available
-flush	KEYWORD2	Serial_Flush
-
-setup	KEYWORD3	Setup
-loop	KEYWORD3	Loop
+#ops
+adc	KEYWORD1	
+ADC	KEYWORD1	
+and	KEYWORD1	
+AND	KEYWORD1	
+asl	KEYWORD1	
+ASL	KEYWORD1	
+bcc	KEYWORD1	
+BCC	KEYWORD1	
+bcs	KEYWORD1	
+BCS	KEYWORD1	
+beq	KEYWORD1	
+BEQ	KEYWORD1	
+bit	KEYWORD1	
+BIT	KEYWORD1	
+bmi	KEYWORD1	
+BMI	KEYWORD1	
+bne KEYWORD1	
+BNE	KEYWORD1	
+bpl	KEYWORD1	
+BPL	KEYWORD1	
+brk	KEYWORD1	
+BRK	KEYWORD1	
+bvc	KEYWORD1	
+BVC	KEYWORD1	
+bvs	KEYWORD1	
+BVS	KEYWORD1	
+clc	KEYWORD1	
+CLC	KEYWORD1	
+cld	KEYWORD1	
+CLD	KEYWORD1	
+cli	KEYWORD1	
+CLI	KEYWORD1	
+clv	KEYWORD1	
+CLV	KEYWORD1	
+cmp	KEYWORD1	
+CMP	KEYWORD1	
+cpx	KEYWORD1	
+CPX	KEYWORD1	
+cpy	KEYWORD1	
+CPY	KEYWORD1	
+dec	KEYWORD1	
+DEC	KEYWORD1	
+dex	KEYWORD1	
+DEX	KEYWORD1	
+dey	KEYWORD1	
+DEY	KEYWORD1	
+eor	KEYWORD1	
+EOR	KEYWORD1	
+inc	KEYWORD1	
+INC	KEYWORD1	
+inx	KEYWORD1	
+INX	KEYWORD1	
+iny	KEYWORD1	
+INY	KEYWORD1	
+jmp	KEYWORD1	
+JMP	KEYWORD1	
+jsr	KEYWORD1	
+JSR	KEYWORD1	
+lda	KEYWORD1	
+LDA	KEYWORD1	
+ldx	KEYWORD1	
+LDX	KEYWORD1	
+ldy	KEYWORD1	
+LDY	KEYWORD1	
+lsr	KEYWORD1	
+LSR	KEYWORD1	
+nop	KEYWORD1	
+NOP	KEYWORD1	
+ora	KEYWORD1	
+ORA	KEYWORD1	
+pha	KEYWORD1	
+PHA	KEYWORD1	
+php	KEYWORD1	
+PHP	KEYWORD1	
+pla	KEYWORD1	
+PLA	KEYWORD1	
+plp	KEYWORD1	
+PLP	KEYWORD1	
+rol	KEYWORD1	
+ROL	KEYWORD1	
+ror	KEYWORD1	
+ROR	KEYWORD1	
+rti	KEYWORD1	
+RTI	KEYWORD1	
+rts	KEYWORD1	
+RTS	KEYWORD1	
+sbc	KEYWORD1	
+SBC	KEYWORD1	
+sec	KEYWORD1	
+SEC	KEYWORD1	
+sed	KEYWORD1	
+SED	KEYWORD1	
+sei	KEYWORD1	
+SEI	KEYWORD1	
+sta	KEYWORD1	
+STA	KEYWORD1	
+stx	KEYWORD1	
+STX	KEYWORD1	
+sty	KEYWORD1	
+STY	KEYWORD1	
+tax	KEYWORD1	
+TAX	KEYWORD1	
+tay	KEYWORD1	
+TAY	KEYWORD1	
+tsx	KEYWORD1	
+TSX	KEYWORD1	
+txa	KEYWORD1	
+TXA	KEYWORD1	
+txs	KEYWORD1	
+TXS	KEYWORD1	
+tya	KEYWORD1	
+TYA	KEYWORD1	
