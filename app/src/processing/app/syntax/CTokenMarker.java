@@ -198,7 +198,7 @@ loop:           for(int i = offset; i < mlength; i++)
 
         public static KeywordMap getKeywords()
         {
-                if(cKeywords == null)
+                /*if(cKeywords == null)
                 {
                         cKeywords = new KeywordMap(false);
                         cKeywords.add("char",Token.KEYWORD3);
@@ -243,7 +243,7 @@ loop:           for(int i = offset; i < mlength; i++)
                         cKeywords.add("true",Token.LITERAL2);
                         cKeywords.add("false",Token.LITERAL2);
                         cKeywords.add("NULL",Token.LITERAL2);
-                }
+                }*/
                 return cKeywords;
         }
 

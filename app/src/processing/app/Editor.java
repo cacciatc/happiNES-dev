@@ -1810,7 +1810,7 @@ public class Editor extends JFrame implements RunnerListener {
     internalCloseRunner();
     running = true;
     toolbar.activate(EditorToolbar.RUN);
-    statusNotice("Compiling...");
+    statusNotice("Assembling...");
 
     // do this to advance/clear the terminal window / dos prompt / etc
     for (int i = 0; i < 10; i++) System.out.println();
@@ -1846,7 +1846,7 @@ public class Editor extends JFrame implements RunnerListener {
       try {
         sketch.prepare();
         String appletClassName = sketch.build(true);
-        statusNotice("Done compiling.");
+        statusNotice("Done assembling.");
       } catch (Exception e) {
         statusError(e);
       }
