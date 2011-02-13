@@ -1,4 +1,6 @@
+app/pde.*
 core/core
+core/core.*
 core/bin/
 app/bin/
 build/windows/
