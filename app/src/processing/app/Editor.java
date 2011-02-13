@@ -1831,7 +1831,8 @@ public class Editor extends JFrame implements RunnerListener {
       try {
         sketch.prepare();
         sketch.build(false);
-        statusNotice("Done assembling.");
+        statusNotice("Done emulating.");
+        
       } catch (Exception e) {
         statusError(e);
       }

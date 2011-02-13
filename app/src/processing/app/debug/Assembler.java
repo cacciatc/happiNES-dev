@@ -38,16 +38,23 @@ public class Assembler implements MessageConsumer {
   static final String BUGS_URL =
     "http://code.google.com/p/arduino/issues/list";
   static final String SUPER_BADNESS =
-    "Compiler error, please submit this code to " + BUGS_URL;
+    "Assembler error, please submit this code to " + BUGS_URL;
 
   Sketch sketch;
   String buildPath;
   String primaryClassName;
+  String binaryPath;
   boolean verbose;
 
   RunnerException exception;
 
-  public Assembler() { }
+  public Assembler() { 
+	  binaryPath = "";
+  }
+  
+  public String getBinaryPath(){
+	  return binaryPath;
+  }
 
   /**
    * Assemble with p65.pl.
@@ -104,7 +111,7 @@ public class Assembler implements MessageConsumer {
    } */
 
    // run the p65 assembler!
-   assembleFiles(assemblerBasePath, buildPath, includePaths,
+   this.binaryPath = assembleFiles(assemblerBasePath, buildPath, includePaths,
            		 findFilesInPath(buildPath, "pde", false),
            		 boardPreferences);
    
@@ -120,12 +127,7 @@ public class Assembler implements MessageConsumer {
 	String binaryPath = "";
 	
     for (File file : p65Sources) {
-    	System.out.println("found src: " + file);
-        binaryPath = buildPath + File.separator + file.getName() + ".nes";
-    	System.out.println(getCommandAssembler(assemblerBasePath, includePaths,
-                file.getAbsolutePath(),
-                binaryPath,
-                boardPreferences));
+        binaryPath = buildPath + File.separator + file.getName();
         execAsynchronously(getCommandAssembler(assemblerBasePath, includePaths,
                                                  file.getAbsolutePath(),
                                                  binaryPath,
