@@ -1520,7 +1520,8 @@ public class Base {
   }
   
   static public String getAssemblerPath() {
-	      return getContentFile("tools").getAbsolutePath() + File.separator + "assembler" + File.separator;
+	      return getContentFile("tools").getAbsolutePath() + File.separator + "assembler" + File.separator + 
+	      "Ophis-1.0" + File.separator;
   }
   
   static public String getEmulatorPath(){

@@ -86,9 +86,7 @@ public class Emulator implements MessageConsumer {
 	  String harnessPath = "test." + "happiNES-dev" + ".html";
 	  File harnessFile = new File(buildPath, harnessPath);
 	  try{
-		  // Base.saveFile(baseHarnessPath, harnessFile);
 		  // hack due to classpath tom-foolery in the applet
-		  // Base.saveFile("vNES-213.jar", new File(buildPath,"vNES-213.jar"));
 		  Base.copyDir(new File(Base.getEmulatorPath(),""),new File(buildPath,""));
 	  }
 	  catch (IOException e) {
