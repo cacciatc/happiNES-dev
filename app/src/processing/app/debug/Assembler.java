@@ -110,7 +110,7 @@ public class Assembler implements MessageConsumer {
      includePaths.add(file.getPath());
    } */
 
-   // run the p65 assembler!
+   // run the ophis assembler!
    this.binaryPath = assembleFiles(assemblerBasePath, buildPath, includePaths,
            		 findFilesInPath(buildPath, "pde", false),
            		 boardPreferences);
@@ -148,6 +148,7 @@ public class Assembler implements MessageConsumer {
 	  
     String[] command = new String[commandList.size()];
     commandList.toArray(command);
+
     int result = 0;
     
     if (verbose || Preferences.getBoolean("build.verbose")) {
@@ -161,7 +162,7 @@ public class Assembler implements MessageConsumer {
     secondErrorFound = false;
 
     Process process;
-    
+
     try {
       process = Runtime.getRuntime().exec(command);
     } catch (IOException e) {
@@ -272,11 +273,9 @@ public class Assembler implements MessageConsumer {
     String sourceName, String binaryName, Map<String, String> boardPreferences) {
 
     List<String> baseCommandAssembler = new ArrayList(Arrays.asList(new String[] {
-      "perl",
-      assemblerBasePath + "p65.pl",
-      "-l", // generate listing file
+      assemblerBasePath + "ophis.bat",
       sourceName,
-      binaryName
+      binaryName + ".nes"
     }));
 
     return baseCommandAssembler;
