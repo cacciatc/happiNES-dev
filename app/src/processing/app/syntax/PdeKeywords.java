@@ -30,7 +30,7 @@ import java.io.*;
 import java.util.*;
 
 
-public class PdeKeywords extends CTokenMarker {
+public class PdeKeywords extends P65TokenMarker {
 
   // lookup table for the TokenMarker subclass, handles coloring
   static KeywordMap keywordColoring;
@@ -40,7 +40,7 @@ public class PdeKeywords extends CTokenMarker {
 
 
   public PdeKeywords() {
-    super(false, getKeywords());
+    super(getKeywords());
   }
 
 
