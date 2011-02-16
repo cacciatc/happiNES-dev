@@ -9,6 +9,9 @@ import Ophis.IR as IR
 import Ophis.CmdLine as Cmd
 import os
 
+import Ophis.Environment
+
+env = Ophis.Environment.Environment()
 # Copyright 2002 Michael C. Martin.
 # You may use, modify, and distribute this file under the BSD
 # license: See LICENSE.txt for details.

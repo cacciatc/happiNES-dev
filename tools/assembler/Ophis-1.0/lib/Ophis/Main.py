@@ -18,7 +18,7 @@ import Ophis.Errors as Err
 import Ophis.Environment
 import Ophis.CmdLine
 import Ophis.Opcodes
-
+import os
 
 def usage():
 	"Prints a usage message and quits."
@@ -38,6 +38,7 @@ def run_all(infile, outfile):
 	z = Ophis.Frontend.parse(infile)
 	env = Ophis.Environment.Environment()
 
+	
 	m = Ophis.Passes.ExpandMacros()
 	i = Ophis.Passes.InitLabels()
 	l_basic = Ophis.Passes.UpdateLabels()
@@ -72,7 +73,8 @@ def run_ophis():
 	chip_extension = None
 
 	reading_arg = 0
-
+	infile = sys.argv[1]
+	outfile = sys.argv[2]
 	for x in sys.argv[1:]:
 		if reading_arg:
 			try:
@@ -93,13 +95,14 @@ def run_ophis():
 			else:
 				print "FATAL: Unknown option "+x
 				usage()
-		elif infile == None:
-			infile = x
-		elif outfile == None:
-			outfile = x
+		#elif infile == None:
+		#		infile = x
+		#elif outfile == None:
+		#		outfile = x
 		else:
-			print "FATAL: Too many files specified"
-			usage()
+			tmp = ""	
+			#print "FATAL: Too many files specified"
+			#usage()
 
 	if infile is None:
 		print "FATAL: No files specified"
