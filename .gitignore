@@ -3,4 +3,5 @@ core/core
 core/core.*
 core/bin/
 app/bin/
+tools/assembler/Ophis-1.0/lib/Ophis/*.pyc
 build/windows/

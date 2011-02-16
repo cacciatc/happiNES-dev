@@ -49,7 +49,6 @@ loop:           for(int i = offset; i < mlength; i++)
                                 backslash = !backslash;
                                 continue;
                         }
-
                         switch(token)
                         {
                         case Token.NULL:

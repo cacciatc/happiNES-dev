@@ -12,10 +12,13 @@ from __future__ import nested_scopes
 import Ophis.IR as IR
 import Ophis.Frontend as FE
 import Ophis.Errors as Err
-
+import Ophis.Environment
+import sys
+import os
 loadedfiles={}
 basecharmap = "".join([chr(x) for x in range(256)])
 currentcharmap = basecharmap
+#env = Ophis.Environment.Environment()
 
 def reset():
 	global loadedfiles, currentcharmap, basecharmap
@@ -24,19 +27,19 @@ def reset():
 
 def pragmaInclude(ppt, line, result):
 	"Includes a source file"
-	filename = line.expect("STRING").value
+	filename = str(os.path.dirname(sys.argv[1])) + os.sep + line.expect("STRING").value
 	line.expect("EOL")
-	if type(filename)==str:	result.append(FE.parse_file(ppt, filename))
+	if type(filename)==str:	result.append(FE.parse_file(ppt,filename))
 
 def pragmaRequire(ppt, line, result):
 	"Includes a source file at most one time"
-	filename = line.expect("STRING").value
+	filename = str(os.path.dirname(sys.argv[1])) + os.sep + line.expect("STRING").value
 	line.expect("EOL")
 	if type(filename)==str:
 		global loadedfiles
 		if filename not in loadedfiles:
 			loadedfiles[filename]=1
-			result.append(FE.parse_file(ppt, filename))
+			result.append(FE.parse_file(ppt,filename))
 
 def pragmaIncbin(ppt, line, result):
 	"Includes a binary file"

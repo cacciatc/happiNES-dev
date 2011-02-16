@@ -14,6 +14,7 @@ class Environment:
 	"""Environment class.
 	Controls the various scopes and global abstract execution variables."""
 	def __init__(self):
+		self.path = ""	
 		self.dicts = [{}]
 		self.stack = [0]
 		self.pc = 0
@@ -41,6 +42,10 @@ class Environment:
 			self.dicts[0][item] = value
 	def __str__(self):
 		return str(self.dicts)
+	def __setPath__(self,path):
+		self.path = path	
+	def __getPath__(self):
+		return self.path
 	def getPC(self):
 		return self.pc
 	def setPC(self, value):

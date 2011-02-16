@@ -274,8 +274,8 @@ public class Assembler implements MessageConsumer {
 
     List<String> baseCommandAssembler = new ArrayList(Arrays.asList(new String[] {
       assemblerBasePath + "ophis.bat",
-      sourceName,
-      binaryName + ".nes"
+      "\"" + sourceName + "\"",
+      "\"" + binaryName + ".nes\""
     }));
 
     return baseCommandAssembler;
