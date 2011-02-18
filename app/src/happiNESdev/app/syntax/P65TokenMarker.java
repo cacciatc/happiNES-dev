@@ -7,9 +7,13 @@
  * remains intact in all source distributions of this package.
  */
 
-package processing.app.syntax;
+package happiNESdev.app.syntax;
 
 import javax.swing.text.Segment;
+
+import processing.app.syntax.KeywordMap;
+import processing.app.syntax.Token;
+import processing.app.syntax.TokenMarker;
 
 /**
  * P65 token marker.

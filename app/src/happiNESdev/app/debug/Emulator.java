@@ -20,12 +20,15 @@
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-package processing.app.debug;
+package happiNESdev.app.debug;
 
 import processing.app.Base;
 import processing.app.Preferences;
 import processing.app.Sketch;
 import processing.app.SketchCode;
+import processing.app.debug.MessageConsumer;
+import processing.app.debug.MessageSiphon;
+import processing.app.debug.RunnerException;
 import processing.core.*;
 
 import java.io.*;
@@ -172,10 +175,10 @@ public class Emulator implements MessageConsumer {
     boolean emulating = true;
     while (emulating) {
       try {
-        if (in.thread != null)
-          in.thread.join();
-        if (err.thread != null)
-          err.thread.join();
+        if (in.getThread() != null)
+          in.getThread().join();
+        if (err.getThread() != null)
+          err.getThread().join();
         result = process.waitFor();
         //System.out.println("result is " + result);
         emulating = false;
