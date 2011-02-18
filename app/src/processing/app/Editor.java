@@ -94,10 +94,6 @@ public class Editor extends JFrame implements RunnerListener {
   // are the same for all windows (since the board and serial port that are
   // actually used are determined by the preferences, which are shared)
   static JMenu boardsMenu;
-  static JMenu serialMenu;
-
-  static SerialMenuListener serialMenuListener;
-  static SerialMonitor serialMonitor;
   
   EditorHeader header;
   EditorStatus status;
@@ -177,7 +173,6 @@ public class Editor extends JFrame implements RunnerListener {
           fileMenu.insert(examplesMenu, 3);
           sketchMenu.insert(importMenu, 4);
           toolsMenu.insert(boardsMenu, numTools);
-          toolsMenu.insert(serialMenu, numTools + 1);
         }
 
         // added for 1.0.5
@@ -188,15 +183,8 @@ public class Editor extends JFrame implements RunnerListener {
           fileMenu.remove(examplesMenu);
           sketchMenu.remove(importMenu);
           toolsMenu.remove(boardsMenu);
-          toolsMenu.remove(serialMenu);
         }
       });
-
-    //PdeKeywords keywords = new PdeKeywords();
-    //sketchbook = new Sketchbook(this);
-
-    if (serialMonitor == null)
-      serialMonitor = new SerialMonitor(Preferences.get("serial.port"));
     
     buildMenuBar();
 
@@ -654,14 +642,6 @@ public class Editor extends JFrame implements RunnerListener {
 
     addInternalTools(menu);
     
-    item = newJMenuItemShift("Serial Monitor", 'M');
-    item.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-          handleSerial();
-        }
-      });
-    menu.add(item);
-    
     addTools(menu, Base.getToolsFolder());
     File sketchbookTools = new File(Base.getSketchbookFolder(), "tools");
     addTools(menu, sketchbookTools);
@@ -678,22 +658,12 @@ public class Editor extends JFrame implements RunnerListener {
       base.rebuildBoardsMenu(boardsMenu);
     }
     menu.add(boardsMenu);
-    
-    if (serialMenuListener == null)
-      serialMenuListener  = new SerialMenuListener();
-    if (serialMenu == null)
-      serialMenu = new JMenu("Serial Port");
-    populateSerialMenu();
-    menu.add(serialMenu);
-	  
-    menu.addSeparator();
         
     menu.addMenuListener(new MenuListener() {
       public void menuCanceled(MenuEvent e) {}
       public void menuDeselected(MenuEvent e) {}
       public void menuSelected(MenuEvent e) {
         //System.out.println("Tools menu selected.");
-        populateSerialMenu();
       }
     });
 
@@ -881,104 +851,6 @@ public class Editor extends JFrame implements RunnerListener {
     return menu;
   }
 
-
-  class SerialMenuListener implements ActionListener {
-    //public SerialMenuListener() { }
-
-    public void actionPerformed(ActionEvent e) {
-      selectSerialPort(((JCheckBoxMenuItem)e.getSource()).getText());
-    }
-
-    /*
-    public void actionPerformed(ActionEvent e) {
-      System.out.println(e.getSource());
-      String name = e.getActionCommand();
-      PdeBase.properties.put("serial.port", name);
-      System.out.println("set to " + get("serial.port"));
-      //editor.skOpen(path + File.separator + name, name);
-      // need to push "serial.port" into PdeBase.properties
-    }
-    */
-  }
-  
-  protected void selectSerialPort(String name) {
-    if(serialMenu == null) {
-      System.out.println("serialMenu is null");
-      return;
-    }
-    if (name == null) {
-      System.out.println("name is null");
-      return;
-    }
-    JCheckBoxMenuItem selection = null;
-    for (int i = 0; i < serialMenu.getItemCount(); i++) {
-      JCheckBoxMenuItem item = ((JCheckBoxMenuItem)serialMenu.getItem(i));
-      if (item == null) {
-        System.out.println("name is null");
-        continue;
-      }
-      item.setState(false);
-      if (name.equals(item.getText())) selection = item;
-    }
-    if (selection != null) selection.setState(true);
-    //System.out.println(item.getLabel());
-    Preferences.set("serial.port", name);
-    serialMonitor.closeSerialPort();
-    serialMonitor.setVisible(false);
-    serialMonitor = new SerialMonitor(Preferences.get("serial.port"));
-    //System.out.println("set to " + get("serial.port"));
-  }
-
-
-  protected void populateSerialMenu() {
-    // getting list of ports
-
-    JMenuItem rbMenuItem;
-    
-    //System.out.println("Clearing serial port menu.");
-	
-    serialMenu.removeAll();
-    boolean empty = true;
-
-    try
-    {
-      for (Enumeration enumeration = CommPortIdentifier.getPortIdentifiers(); enumeration.hasMoreElements();)
-      {
-        CommPortIdentifier commportidentifier = (CommPortIdentifier)enumeration.nextElement();
-        //System.out.println("Found communication port: " + commportidentifier);
-        if (commportidentifier.getPortType() == CommPortIdentifier.PORT_SERIAL)
-        {
-          //System.out.println("Adding port to serial port menu: " + commportidentifier);
-          String curr_port = commportidentifier.getName();
-          rbMenuItem = new JCheckBoxMenuItem(curr_port, curr_port.equals(Preferences.get("serial.port")));
-          rbMenuItem.addActionListener(serialMenuListener);
-          //serialGroup.add(rbMenuItem);
-          serialMenu.add(rbMenuItem);
-          empty = false;
-        }
-      }
-      if (!empty) {
-        //System.out.println("enabling the serialMenu");
-        serialMenu.setEnabled(true);
-      }
-
-    }
-
-    catch (Exception exception)
-    {
-      System.out.println("error retrieving port list");
-      exception.printStackTrace();
-    }
-	
-    if (serialMenu.getItemCount() == 0) {
-      serialMenu.setEnabled(false);
-    }
-
-    //serialMenu.addSeparator();
-    //serialMenu.add(item);
-  }
-
-
   protected JMenu buildHelpMenu() {
     // To deal with a Mac OS X 10.5 bug, add an extra space after the name
     // so that the OS doesn't try to insert its slow help menu.
@@ -995,7 +867,6 @@ public class Editor extends JFrame implements RunnerListener {
 
     return menu;
   }
-
 
   protected JMenu buildEditMenu() {
     JMenu menu = new JMenu("Edit");
@@ -2121,31 +1992,6 @@ public class Editor extends JFrame implements RunnerListener {
 
     return true;
   }
-  
-  
-  public boolean serialPrompt() {
-    int count = serialMenu.getItemCount();
-    Object[] names = new Object[count];
-    for (int i = 0; i < count; i++) {
-      names[i] = ((JCheckBoxMenuItem)serialMenu.getItem(i)).getText();
-    }
-
-    String result = (String)
-      JOptionPane.showInputDialog(this,
-                                  "Serial port " +
-                                  Preferences.get("serial.port") +
-                                  " not found.\n" +
-                                  "Retry the upload with another serial port?",
-                                  "Serial port not found",
-                                  JOptionPane.PLAIN_MESSAGE,
-                                  null,
-                                  names,
-                                  0);
-    if (result == null) return false;
-    selectSerialPort(result);
-    return true;
-  }
-
 
   /**
    * Called by Sketch &rarr; Export.
@@ -2176,9 +2022,7 @@ public class Editor extends JFrame implements RunnerListener {
     public void run() {
 
       try {
-        serialMonitor.closeSerialPort();
-        serialMonitor.setVisible(false);
-            
+
         uploading = true;
           
         boolean success = sketch.exportApplet(false);
@@ -2187,11 +2031,6 @@ public class Editor extends JFrame implements RunnerListener {
         } else {
           // error message will already be visible
         }
-      } catch (SerialNotFoundException e) {
-        populateSerialMenu();
-        if (serialMenu.getItemCount() == 0) statusError(e);
-        else if (serialPrompt()) run();
-        else statusNotice("Upload canceled.");
       } catch (RunnerException e) {
         //statusError("Error during upload.");
         //e.printStackTrace();
@@ -2209,23 +2048,14 @@ public class Editor extends JFrame implements RunnerListener {
   class DefaultExportAppHandler implements Runnable {
     public void run() {
 
-      try {
-        serialMonitor.closeSerialPort();
-        serialMonitor.setVisible(false);
-            
         uploading = true;
-          
+          try{
         boolean success = sketch.exportApplet(true);
         if (success) {
           statusNotice("Done uploading.");
         } else {
           // error message will already be visible
         }
-      } catch (SerialNotFoundException e) {
-        populateSerialMenu();
-        if (serialMenu.getItemCount() == 0) statusError(e);
-        else if (serialPrompt()) run();
-        else statusNotice("Upload canceled.");
       } catch (RunnerException e) {
         //statusError("Error during upload.");
         //e.printStackTrace();
@@ -2271,18 +2101,6 @@ public class Editor extends JFrame implements RunnerListener {
       return false;
     }
     return true;
-  }
-
-
-  public void handleSerial() {
-    if (uploading) return;
-    
-    try {
-      serialMonitor.openSerialPort();
-      serialMonitor.setVisible(true);
-    } catch (SerialException e) {
-      statusError(e);
-    }
   }
 
   /**

@@ -339,10 +339,6 @@ public class EditorToolbar extends JComponent implements MouseInputListener, Key
     case EXPORT:
       editor.handleExport(e.isShiftDown());
       break;
-
-    case SERIAL:
-      editor.handleSerial();
-      break;
     }
   }
 

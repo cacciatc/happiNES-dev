@@ -1555,7 +1555,7 @@ public class Sketch {
    * Handle export to applet.
    */
   public boolean exportApplet(String appletPath, boolean verbose)
-    throws RunnerException, IOException, SerialException {
+    throws RunnerException, IOException{
     
     // Make sure the user didn't hide the sketch folder
     ensureExistence();
