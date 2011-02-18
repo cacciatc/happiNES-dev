@@ -33,7 +33,7 @@ import java.io.*;
  * new PrintStream(new MessageStream()).
  * It's also used by Compiler.
  */
-class MessageStream extends OutputStream {
+public class MessageStream extends OutputStream {
 
   MessageConsumer messageConsumer;
 

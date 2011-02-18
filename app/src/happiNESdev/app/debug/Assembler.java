@@ -1,10 +1,9 @@
 /* -*- mode: java; c-basic-offset: 2; indent-tabs-mode: nil -*- */
 
 /*
-  Part of the Processing project - http://processing.org
+  Part of the happiNES-dev project - http://github.com/cacciatc/happiNES-dev
 
-  Copyright (c) 2004-08 Ben Fry and Casey Reas
-  Copyright (c) 2001-04 Massachusetts Institute of Technology
+  Copyright (c) 2011 Chris Cacciatore
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -21,12 +20,17 @@
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-package processing.app.debug;
+package happiNESdev.app.debug;
 
 import processing.app.Base;
 import processing.app.Preferences;
 import processing.app.Sketch;
 import processing.app.SketchCode;
+import processing.app.debug.MessageConsumer;
+import processing.app.debug.MessageSiphon;
+import processing.app.debug.MessageStream;
+import processing.app.debug.RunnerException;
+import processing.app.debug.Target;
 import processing.core.*;
 
 import java.io.*;
@@ -179,10 +183,10 @@ public class Assembler implements MessageConsumer {
     boolean compiling = true;
     while (compiling) {
       try {
-        if (in.thread != null)
-          in.thread.join();
-        if (err.thread != null)
-          err.thread.join();
+        if (in.getThread() != null)
+          in.getThread().join();
+        if (err.getThread() != null)
+          err.getThread().join();
         result = process.waitFor();
         //System.out.println("result is " + result);
         compiling = false;

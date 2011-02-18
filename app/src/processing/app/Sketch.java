@@ -23,16 +23,17 @@
 
 package processing.app;
 
-import processing.app.debug.Assembler;
 import processing.app.debug.AvrdudeUploader;
 import processing.app.debug.Compiler;
-import processing.app.debug.Emulator;
 import processing.app.debug.RunnerException;
 import processing.app.debug.Sizer;
 import processing.app.debug.Uploader;
 import processing.app.preproc.*;
 import processing.core.*;
 
+
+import happiNESdev.app.debug.Assembler;
+import happiNESdev.app.debug.Emulator;
 
 import java.awt.*;
 import java.awt.event.*;

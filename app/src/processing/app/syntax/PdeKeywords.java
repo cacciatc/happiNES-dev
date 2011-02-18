@@ -26,6 +26,8 @@ package processing.app.syntax;
 
 import processing.app.*;
 
+import happiNESdev.app.syntax.P65TokenMarker;
+
 import java.io.*;
 import java.util.*;
 
