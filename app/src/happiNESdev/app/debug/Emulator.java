@@ -47,6 +47,9 @@ public class Emulator implements MessageConsumer {
   String buildPath;
   Sketch sketch;
   
+  Process process;
+  boolean forcedStop;
+  
   boolean verbose;
   boolean firstErrorFound;
   boolean secondErrorFound;
@@ -70,6 +73,7 @@ public class Emulator implements MessageConsumer {
     this.verbose = verbose;
     this.sketch = sketch;
 
+    forcedStop = false;
     // create a custom html harness
     String harnessPath = pullAndUpdateHarness(romPath);
     
@@ -156,8 +160,6 @@ public class Emulator implements MessageConsumer {
 
     firstErrorFound = false;  // haven't found any errors yet
     secondErrorFound = false;
-
-    Process process;
     
     try {
       process = Runtime.getRuntime().exec(command);
@@ -198,7 +200,7 @@ public class Emulator implements MessageConsumer {
       System.err.println(command[0] + " returned " + result);
     }
 
-    if (result != 0) {
+    if (result != 0 && forcedStop == false) {
       RunnerException re = new RunnerException("Error emulating.");
       re.hideStackTrace();
       throw re;
@@ -252,6 +254,12 @@ public class Emulator implements MessageConsumer {
     }
     
     System.err.print(s);
+  }
+  public void stopProcess(){
+	  if(process != null){
+		  forcedStop = true;
+		  process.destroy();
+	  }
   }
 
   /////////////////////////////////////////////////////////////////////////////

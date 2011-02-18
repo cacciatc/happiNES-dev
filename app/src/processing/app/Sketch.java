@@ -59,6 +59,8 @@ public class Sketch {
    * (without .pde or .java extension)
    */
   private String name;
+  
+  private Emulator emulate;
 
   /** true if any of the files have been modified. */
   private boolean modified;
@@ -1133,6 +1135,9 @@ public class Sketch {
     // if the java runtime is holding onto any files in the build dir, we
     // won't be able to delete them, so we need to force a gc here
     System.gc();
+    if(emulate != null){
+    	emulate.stopProcess();
+    }
 
     // note that we can't remove the builddir itself, otherwise
     // the next time we start up, internal runs using Runner won't
@@ -1525,7 +1530,7 @@ public class Sketch {
 
     // assemble the program. errors will happen as a RunnerException that will bubble up to whomever called build().
     Assembler assemble = new Assembler();
-    Emulator emulate = new Emulator();
+    emulate = new Emulator();
     if (assemble.assemble(this, buildPath, verbose)) {
       // size(buildPath, primaryClassName);
       // return primaryClassName;
