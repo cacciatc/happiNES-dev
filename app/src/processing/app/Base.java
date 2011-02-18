@@ -1746,7 +1746,7 @@ public class Base {
   }
 
   static public void showReference() {
-    showReference("index.html");
+    showReference("ophismanual.pdf");
   }
 
 

@@ -538,21 +538,13 @@ public class Editor extends JFrame implements RunnerListener {
       });
     fileMenu.add(saveAsMenuItem);
 
-    item = newJMenuItem("Upload to I/O Board", 'U');
+    item = newJMenuItem("Assemble & Emulate", 'U');
     item.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
           handleExport(false);
         }
       });
     fileMenu.add(item);
-
-//    item = newJMenuItemShift("Upload to I/O Board (verbose)", 'U');
-//    item.addActionListener(new ActionListener() {
-//        public void actionPerformed(ActionEvent e) {
-//          handleExport(true);
-//        }
-//      });
-//    fileMenu.add(item);
 
     fileMenu.addSeparator();
 
