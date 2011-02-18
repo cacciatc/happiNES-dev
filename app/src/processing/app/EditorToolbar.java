@@ -37,12 +37,12 @@ public class EditorToolbar extends JComponent implements MouseInputListener, Key
 
   /** Rollover titles for each button. */
   static final String title[] = {
-    "Assemble", "Stop", "New", "Open", "Save", "Upload", "Serial Monitor"
+    "Assemble", "Stop", "New", "Open", "Save", "Upload"
   };
 
   /** Titles for each button when the shift key is pressed. */ 
   static final String titleShift[] = {
-    "Assemble (w/ Verbose Output)", "Stop", "New Editor Window", "Open in Another Window", "Save", "Upload (w/ Verbose Output)", "Serial Monitor"
+    "Assemble (w/ Verbose Output)", "Stop", "New Editor Window", "Open in Another Window", "Save", "Upload (w/ Verbose Output)"
   };
 
   static final int BUTTON_COUNT  = title.length;
@@ -63,8 +63,6 @@ public class EditorToolbar extends JComponent implements MouseInputListener, Key
   static final int OPEN     = 3;
   static final int SAVE     = 4;
   static final int EXPORT   = 5;
-
-  static final int SERIAL   = 6;
 
   static final int INACTIVE = 0;
   static final int ROLLOVER = 1;
@@ -110,7 +108,6 @@ public class EditorToolbar extends JComponent implements MouseInputListener, Key
     which[buttonCount++] = OPEN;
     which[buttonCount++] = SAVE;
     which[buttonCount++] = EXPORT;
-    which[buttonCount++] = SERIAL;
 
     currentRollover = -1;
 
