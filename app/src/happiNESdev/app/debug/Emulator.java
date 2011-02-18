@@ -35,6 +35,8 @@ import java.io.*;
 import java.util.*;
 import java.util.zip.*;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.*;
 
 public class Emulator implements MessageConsumer {
@@ -78,7 +80,8 @@ public class Emulator implements MessageConsumer {
     String harnessPath = pullAndUpdateHarness(romPath);
     
     // run vNES
-    execAsynchronously(getCommandEmulatorString(harnessPath));
+    //execAsynchronously(getCommandEmulatorString(harnessPath));
+    Base.openURL(harnessPath);
    
     return true;
   }
