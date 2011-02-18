@@ -985,111 +985,13 @@ public class Editor extends JFrame implements RunnerListener {
     JMenu menu = new JMenu("Help ");
     JMenuItem item;
 
-    /*
-    // testing internal web server to serve up docs from a zip file
-    item = new JMenuItem("Web Server Test");
+    item = new JMenuItem("Visit happiNES-dev");
     item.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-          //WebServer ws = new WebServer();
-          SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-              try {
-                int port = WebServer.launch("/Users/fry/coconut/processing/build/shared/reference.zip");
-                Base.openURL("http://127.0.0.1:" + port + "/reference/setup_.html");
-
-              } catch (IOException e1) {
-                e1.printStackTrace();
-              }
-            }
-          });
+          Base.openURL("http://github.com/cacciatc/happiNES-dev");
         }
       });
     menu.add(item);
-    */
-
-    /*
-    item = new JMenuItem("Browser Test");
-    item.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-          //Base.openURL("http://processing.org/learning/gettingstarted/");
-          //JFrame browserFrame = new JFrame("Browser");
-          BrowserStartup bs = new BrowserStartup("jar:file:/Users/fry/coconut/processing/build/shared/reference.zip!/reference/setup_.html");
-          bs.initUI();
-          bs.launch();
-        }
-      });
-    menu.add(item);
-    */
-
-    item = new JMenuItem("Getting Started");
-    item.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-          Base.showGettingStarted();
-        }
-      });
-    menu.add(item);
-
-    item = new JMenuItem("Environment");
-    item.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-          Base.showEnvironment();
-        }
-      });
-    menu.add(item);
-
-    item = new JMenuItem("Troubleshooting");
-    item.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-          Base.showTroubleshooting();
-        }
-      });
-    menu.add(item);
-
-    item = new JMenuItem("Reference");
-    item.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-          Base.showReference();
-        }
-      });
-    menu.add(item);
-
-    item = newJMenuItemShift("Find in Reference", 'F');
-    item.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-          if (textarea.isSelectionActive()) {
-            handleFindReference();
-          }
-        }
-      });
-    menu.add(item);
-
-    item = new JMenuItem("Frequently Asked Questions");
-    item.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-          Base.showFAQ();
-        }
-      });
-    menu.add(item);
-
-    item = new JMenuItem("Visit Arduino.cc");
-    item.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-          Base.openURL("http://arduino.cc/");
-        }
-      });
-    menu.add(item);
-
-    // macosx already has its own about menu
-    if (!Base.isMacOS()) {
-      menu.addSeparator();
-      item = new JMenuItem("About Arduino");
-      item.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-            base.handleAbout();
-          }
-        });
-      menu.add(item);
-    }
 
     return menu;
   }
