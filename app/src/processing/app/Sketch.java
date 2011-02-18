@@ -23,11 +23,7 @@
 
 package processing.app;
 
-import processing.app.debug.AvrdudeUploader;
-import processing.app.debug.Compiler;
 import processing.app.debug.RunnerException;
-import processing.app.debug.Sizer;
-import processing.app.debug.Uploader;
 import processing.app.preproc.*;
 import processing.core.*;
 
@@ -1060,7 +1056,7 @@ public class Sketch {
     // make sure the user didn't hide the sketch folder
     ensureExistence();
 
-    String list[] = Compiler.headerListFromIncludePath(jarPath);
+    //String list[] = Compiler.headerListFromIncludePath(jarPath);
 
     // import statements into the main sketch file (code[0])
     // if the current code is a .java file, insert into current
@@ -1072,11 +1068,11 @@ public class Sketch {
     // statement is already in there, but if the user has the import
     // commented out, then this will be a problem.
     StringBuffer buffer = new StringBuffer();
-    for (int i = 0; i < list.length; i++) {
+   /* for (int i = 0; i < list.length; i++) {
       buffer.append("#include <");
       buffer.append(list[i]);
       buffer.append(">\n");
-    }
+    }*/
     buffer.append('\n');
     buffer.append(editor.getText());
     editor.setText(buffer.toString());
@@ -1589,47 +1585,8 @@ public class Sketch {
 //                       "name in the code was " + foundName, null);
 //      return false;
 //    }
-
-    upload(appletFolder.getPath(), foundName, verbose);
     
     return true;
-  }
-
-
-  protected void size(String buildPath, String suggestedClassName)
-    throws RunnerException {
-    long size = 0;
-    String maxsizeString = Base.getBoardPreferences().get("upload.maximum_size");
-    if (maxsizeString == null) return;
-    long maxsize = Integer.parseInt(maxsizeString);
-    Sizer sizer = new Sizer(buildPath, suggestedClassName);
-      try {
-      size = sizer.computeSize();
-      System.out.println("Binary sketch size: " + size + " bytes (of a " +
-        maxsize + " byte maximum)");      
-    } catch (RunnerException e) {
-      System.err.println("Couldn't determine program size: " + e.getMessage());
-    }
-
-    if (size > maxsize)
-      throw new RunnerException(
-        "Sketch too big; see http://www.arduino.cc/en/Guide/Troubleshooting#size for tips on reducing it.");
-  }
-
-
-  protected String upload(String buildPath, String suggestedClassName, boolean verbose)
-    throws RunnerException, SerialException {
-
-    Uploader uploader;
-
-    // download the program
-    //
-    uploader = new AvrdudeUploader();
-    boolean success = uploader.uploadUsingPreferences(buildPath,
-                                                      suggestedClassName,
-                                                      verbose);
-
-    return success ? suggestedClassName : null;
   }
 
   /**

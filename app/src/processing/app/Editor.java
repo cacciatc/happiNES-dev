@@ -148,7 +148,7 @@ public class Editor extends JFrame implements RunnerListener {
 
 
   public Editor(Base ibase, String path, int[] location) {
-    super("Arduino");
+    super("happiNES-dev");
     this.base = ibase;
 
     Base.setIcon(this);
@@ -695,10 +695,6 @@ public class Editor extends JFrame implements RunnerListener {
     menu.add(serialMenu);
 	  
     menu.addSeparator();
-
-    JMenu bootloaderMenu = new JMenu("Burn Bootloader");
-    base.rebuildBurnBootloaderMenu(bootloaderMenu);
-    menu.add(bootloaderMenu);
         
     menu.addMenuListener(new MenuListener() {
       public void menuCanceled(MenuEvent e) {}
@@ -2119,7 +2115,7 @@ public class Editor extends JFrame implements RunnerListener {
     }
     header.rebuild();
     // Set the title of the window to "sketch_070752a - Processing 0126"
-    setTitle(sketch.getName() + " | Arduino " + Base.VERSION_NAME);
+    setTitle(sketch.getName() + " | happiNES-dev " + Base.VERSION_NAME);
     // Disable untitled setting from previous document, if any
     untitled = false;
 
@@ -2394,32 +2390,6 @@ public class Editor extends JFrame implements RunnerListener {
       statusError(e);
     }
   }
-
-
-  protected void handleBurnBootloader(final String target, final String programmer) {
-    console.clear();
-    statusNotice("Burning bootloader to I/O Board (this may take a minute)...");
-    SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        try {
-          Uploader uploader = new AvrdudeUploader();
-          if (uploader.burnBootloader(target, programmer)) {
-            statusNotice("Done burning bootloader.");
-          } else {
-            statusError("Error while burning bootloader.");
-            // error message will already be visible
-          }
-        } catch (RunnerException e) {
-          statusError("Error while burning bootloader.");
-          e.printStackTrace();
-          //statusError(e);
-        } catch (Exception e) {
-          statusError("Error while burning bootloader.");
-          e.printStackTrace();
-        }
-      }});
-  }
-
 
   /**
    * Handler for File &rarr; Page Setup.

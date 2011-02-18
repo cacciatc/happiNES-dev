@@ -40,7 +40,7 @@ import java.util.zip.*;
 
 public class Assembler implements MessageConsumer {
   static final String BUGS_URL =
-    "http://code.google.com/p/arduino/issues/list";
+    "http://github.com/cacciatc/happiNES-dev/issues";
   static final String SUPER_BADNESS =
     "Assembler error, please submit this code to " + BUGS_URL;
 
@@ -251,13 +251,7 @@ public class Assembler implements MessageConsumer {
         SketchCode code = sketch.getCode(e.getCodeIndex());
         String fileName = code.isExtension(sketch.getDefaultExtension()) ? code.getPrettyName() : code.getFileName();
         s = fileName + ":" + e.getCodeLine() + ": error: " + e.getMessage();        
-      }
-      
-      if (pieces[3].trim().equals("SPI.h: No such file or directory")) {
-        e = new RunnerException("Please import the SPI library from the Sketch > Import Library menu.");
-        s += "\nAs of Arduino 0019, the Ethernet library depends on the SPI library." +
-             "\nYou appear to be using it or another library that depends on the SPI library.";
-      }        
+      }      
       
       if (exception == null && e != null) {
         exception = e;

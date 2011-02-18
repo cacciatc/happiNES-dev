@@ -29,7 +29,6 @@ import java.util.*;
 
 import javax.swing.*;
 
-import processing.app.debug.Compiler;
 import processing.app.debug.Target;
 import processing.core.*;
 
@@ -252,9 +251,9 @@ public class Base {
       if (!skechbookFolder.exists()) {
         Base.showWarning("Sketchbook folder disappeared",
                          "The sketchbook folder no longer exists.\n" +
-                         "Arduino will switch to the default sketchbook\n" +
+                         "happiNES-dev will switch to the default sketchbook\n" +
                          "location, and create a new sketchbook folder if\n" +
-                         "necessary. Arduino will then stop talking about\n" +
+                         "necessary. happiNES-dev will then stop talking about\n" +
                          "himself in the third person.", null);
         sketchbookPath = null;
       }
@@ -1014,28 +1013,6 @@ public class Base {
       }
     }
   }
-  
-  
-  public void rebuildBurnBootloaderMenu(JMenu menu) {
-    //System.out.println("rebuilding burn bootloader menu");
-    menu.removeAll();      
-    for (Target target : targetsTable.values()) {
-      for (String programmer : target.getProgrammers().keySet()) {
-        AbstractAction action = 
-          new AbstractAction(
-            "w/ " + target.getProgrammers().get(programmer).get("name")) {
-            public void actionPerformed(ActionEvent actionevent) {
-              activeEditor.handleBurnBootloader((String) getValue("target"),
-                                                (String) getValue("programmer"));
-            }
-          };
-        action.putValue("target", target.getName());
-        action.putValue("programmer", programmer);
-        JMenuItem item = new JMenuItem(action);
-        menu.add(item);
-      }
-    }
-  }
 
 
   /**
@@ -1194,11 +1171,11 @@ public class Base {
 //        String packages[] =
 //          Compiler.packageListFromClassPath(libraryClassPath);
         libraries.add(subfolder);
-        String packages[] =
+        /*String packages[] =
           Compiler.headerListFromIncludePath(subfolder.getAbsolutePath());
         for (String pkg : packages) {
           importToLibraryTable.put(pkg, subfolder);
-        }
+        }*/
 
         JMenuItem item = new JMenuItem(libraryName);
         item.addActionListener(listener);
@@ -1509,16 +1486,6 @@ public class Base {
     return getHardwareFolder().getAbsolutePath();
   }
   
-  
-  static public String getAvrBasePath() {
-    if(Base.isLinux()) {
-      return ""; // avr tools are installed system-wide and in the path
-    } else {
-      return getHardwarePath() + File.separator + "tools" +
-             File.separator + "avr" + File.separator + "bin" + File.separator;
-    }  
-  }
-  
   static public String getAssemblerPath() {
 	      return getContentFile("tools").getAbsolutePath() + File.separator + "assembler" + File.separator + 
 	      "Ophis-1.0" + File.separator;
@@ -1527,7 +1494,6 @@ public class Base {
   static public String getEmulatorPath(){
 	  return getContentFile("tools").getAbsolutePath() + File.separator + "vNES" + File.separator;
   }
-  
   
   static public Target getTarget() {
     return Base.targetsTable.get(Preferences.get("target"));
