@@ -236,9 +236,9 @@ run.present.exclusive = false
 # use this by default to hide the menu bar and dock on osx
 run.present.exclusive.macosx = true
 
-# ARDUINO PREFERENCES
-board = uno
-target = arduino
+# happiNES-dev PREFERENCES
+board=nes
+target=nes
 
 upload.using = bootloader
 
@@ -247,3 +247,27 @@ serial.databits=8
 serial.stopbits=1
 serial.parity=N
 serial.debug_rate=9600
+
+emulator.sound=ON
+emulator.stereo=ON
+emulator.scanlines=OFF
+emulator.scale=ON
+emulator.fps=OFF
+
+emulator.p1_up=UP
+emulator.p1_down=DOWN
+emulator.p1_left=LEFT
+emulator.p1_right=RIGHT
+emulator.p1_a=A
+emulator.p1_b=B
+emulator.p1_start=ENTER
+emulator.p1_select=SPACE
+
+emulator.p2_up=UP
+emulator.p2_down=DOWN
+emulator.p2_left=LEFT
+emulator.p2_right=RIGHT
+emulator.p2_a=A
+emulator.p2_b=B
+emulator.p2_start=ENTER
+emulator.p2_select=SPACE

@@ -65,7 +65,7 @@ public class Base {
   static private boolean commandLine;
 
   // A single instance of the preferences window
-  Preferences preferencesFrame;
+  static Preferences preferencesFrame;
 
   // set to true after the first time the menu is built.
   // so that the errors while building don't show up again.
@@ -1545,13 +1545,13 @@ public class Base {
   }
   
   static public Map<String, String> getEmulatorPreferences() {
-	Target target = getTarget();
-	if (target == null) return new LinkedHashMap();
-	Map map = target.getBoards();
-	if (map == null) return new LinkedHashMap();
-	map = (Map) map.get(Preferences.get("emulator"));
-	if (map == null) return new LinkedHashMap();
-	return map;
+	  Target target = getTarget();
+	  if (target == null) return new LinkedHashMap();
+	  Map map = target.getBoards();
+	  if (map == null) return new LinkedHashMap();
+	  map = (Map) map.get(Preferences.get("board"));
+	  if (map == null) return new LinkedHashMap();
+	  return map;
   }
   
 
@@ -2304,6 +2304,9 @@ public class Base {
     return outgoing;
   }
 
+  static public Preferences getPreferences(){
+	  return preferencesFrame;
+  }
 
   static protected void listFiles(String basePath,
                                   String path, Vector<String> vector) {

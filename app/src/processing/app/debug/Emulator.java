@@ -1,10 +1,9 @@
 /* -*- mode: java; c-basic-offset: 2; indent-tabs-mode: nil -*- */
 
 /*
-  Part of the Processing project - http://processing.org
+  Part of the happiNES-dev project - http://github.com/cacciatc/happiNES-dev
 
-  Copyright (c) 2004-08 Ben Fry and Casey Reas
-  Copyright (c) 2001-04 Massachusetts Institute of Technology
+  Copyright (c) 2011 Chris Cacciatore
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -67,11 +66,9 @@ public class Emulator implements MessageConsumer {
     this.buildPath = buildPath;
     this.verbose = verbose;
     this.sketch = sketch;
-    
-    Map<String, String> emulatorPreferences = Base.getEmulatorPreferences();
 
     // create a custom html harness
-    String harnessPath = pullAndUpdateHarness(romPath,emulatorPreferences);
+    String harnessPath = pullAndUpdateHarness(romPath);
     
     // run vNES
     execAsynchronously(getCommandEmulatorString(harnessPath));
@@ -79,7 +76,7 @@ public class Emulator implements MessageConsumer {
     return true;
   }
   
-  public String pullAndUpdateHarness(String romPath,Map<String, String> emulatorPreferences)
+  public String pullAndUpdateHarness(String romPath)
   throws RunnerException{
 	  // copy the base-harness into build directory
 	  String baseHarnessPath = Base.getEmulatorPath() + File.separator + "base-harness.html";
@@ -98,29 +95,30 @@ public class Emulator implements MessageConsumer {
 		  PrintWriter pwr = new PrintWriter(new FileWriter(harnessFile.getAbsolutePath()));
 		  pwr.println("<html>");
 		  pwr.println("<applet code=\"vNES.class\" archive=\"vNES-213.jar\" width=\"512\" height=\"480\">");
-		  pwr.println("<param name=\"rom\" value=\"" + romPath + ".nes\">");
-		  pwr.println("<param name=\"romsize\" value=\"\">");
-		  pwr.println("<param name=\"sound\" value=\"on\">");
-		  pwr.println("<param name=\"stereo\" value=\"on\">");
-		  pwr.println("<param name=\"scanlines\" value=\"\">");
-		  pwr.println("<param name=\"scale\" value=\"on\">");
-		  pwr.println("<param name=\"fps\" value=\"\">");
-		  pwr.println("<param name=\"p1_up\" value=\"\">");
-		  pwr.println("<param name=\"p1_down\" value=\"\">");
-		  pwr.println("<param name=\"p1_left\" value=\"\">");
-		  pwr.println("<param name=\"p1_right\" value=\"\">");
-		  pwr.println("<param name=\"p1_a\" value=\"\">");
-		  pwr.println("<param name=\"p1_b\" value=\"\">");
-		  pwr.println("<param name=\"p1_start\" value=\"\">");
-		  pwr.println("<param name=\"p1_select\" value=\"\">");
-		  pwr.println("<param name=\"p2_up\" value=\"\">");
-		  pwr.println("<param name=\"p2_down\" value=\"\">");
-		  pwr.println("<param name=\"p2_left\" value=\"\">");
-		  pwr.println("<param name=\"p2_right\" value=\"\">");
-		  pwr.println("<param name=\"p2_a\" value=\"\">");
-		  pwr.println("<param name=\"p2_b\" value=\"\">");
-		  pwr.println("<param name=\"p2_start\" value=\"\">");
-		  pwr.println("<param name=\"p2_select\" value=\"\">");
+		  pwr.println("<param name=\"rom\" value=\"" + romPath + ".nes\" />");
+		  pwr.println("<param name=\"romsize\" value=\"\" />");
+		  pwr.println("<param name=\"sound\" value=\""+getEmulatorAttr("emulator.sound").toLowerCase()+"\" />");
+		  pwr.println("<param name=\"stereo\" value=\""+getEmulatorAttr("emulator.stereo").toLowerCase()+"\" />");
+		  pwr.println("<param name=\"scanlines\" value=\""+getEmulatorAttr("emulator.scanlines").toLowerCase()+"\" />");
+		  pwr.println("<param name=\"scale\" value=\""+getEmulatorAttr("emulator.scale").toLowerCase()+"\" />");
+		  pwr.println("<param name=\"fps\" value=\""+getEmulatorAttr("emulator.fps").toLowerCase()+"\" />");
+		  pwr.println("<param name=\"p1_up\" value=\""+getEmulatorAttr("emulator.p1_up")+"\" />");
+		  pwr.println("<param name=\"p1_down\" value=\""+getEmulatorAttr("emulator.p1_down")+"\" />");
+		  pwr.println("<param name=\"p1_left\" value=\""+getEmulatorAttr("emulator.p1_left")+"\" />");
+		  pwr.println("<param name=\"p1_right\" value=\""+getEmulatorAttr("emulator.p1_right")+"\" />");
+		  pwr.println("<param name=\"p1_a\" value=\""+getEmulatorAttr("emulator.p1_a")+"\" />");
+		  pwr.println("<param name=\"p1_b\" value=\""+getEmulatorAttr("emulator.p1_b")+"\" />");
+		  pwr.println("<param name=\"p1_start\" value=\""+getEmulatorAttr("emulator.p1_start")+"\" />");
+		  pwr.println("<param name=\"p1_select\" value=\""+getEmulatorAttr("emulator.p1_select")+"\" />");
+		  
+		  pwr.println("<param name=\"p2_up\" value=\""+getEmulatorAttr("emulator.p2_up")+"\" />");
+		  pwr.println("<param name=\"p2_down\" value=\""+getEmulatorAttr("emulator.p2_down")+"\" />");
+		  pwr.println("<param name=\"p2_left\" value=\""+getEmulatorAttr("emulator.p2_left")+"\" />");
+		  pwr.println("<param name=\"p2_right\" value=\""+getEmulatorAttr("emulator.p2_right")+"\" />");
+		  pwr.println("<param name=\"p2_a\" value=\""+getEmulatorAttr("emulator.p2_a")+"\" />");
+		  pwr.println("<param name=\"p2_b\" value=\""+getEmulatorAttr("emulator.p2_b")+"\" />");
+		  pwr.println("<param name=\"p2_start\" value=\""+getEmulatorAttr("emulator.p2_start")+"\" />");
+		  pwr.println("<param name=\"p2_select\" value=\""+getEmulatorAttr("emulator.p2_select")+"\" />");
 		  pwr.println("</applet>");
 		  pwr.println("</html>");
 		  pwr.flush();
@@ -131,6 +129,10 @@ public class Emulator implements MessageConsumer {
 	    	throw new RunnerException("Problem updating " + harnessPath + " within the build folder");
 	  }
 	  return harnessFile.getAbsolutePath();
+  }
+  
+  private String getEmulatorAttr(String key){
+	  return Preferences.get(key);
   }
 
   /**
