@@ -269,13 +269,29 @@ public class Assembler implements MessageConsumer {
    */
   static private List<String> getCommandAssembler(String assemblerBasePath, List includePaths,
     String sourceName, String binaryName, Map<String, String> boardPreferences) {
-
-    List<String> baseCommandAssembler = new ArrayList(Arrays.asList(new String[] {
-      assemblerBasePath + "ophis.bat",
-      "\"" + sourceName + "\"",
-      "\"" + binaryName + ".nes\""
-    }));
-
+	List<String> baseCommandAssembler;
+	
+	if(Base.getPlatformName() == "windows"){
+		baseCommandAssembler = new ArrayList(Arrays.asList(new String[] {
+			      assemblerBasePath + "ophis.bat",
+			      "\"" + sourceName + "\"",
+			      "\"" + binaryName + ".nes\""
+			    }));
+	}
+	else if(Base.getPlatformName() == "macosx"){
+		baseCommandAssembler = new ArrayList(Arrays.asList(new String[] {
+			      assemblerBasePath + "./ophis.sh",
+			      "\"" + sourceName + "\"",
+			      "\"" + binaryName + ".nes\""
+			    }));
+	}
+	else{
+		baseCommandAssembler = new ArrayList(Arrays.asList(new String[] {
+			      assemblerBasePath + "./ophis.sh",
+			      "\"" + sourceName + "\"",
+			      "\"" + binaryName + ".nes\""
+			    }));
+	}
     return baseCommandAssembler;
   }
 	
