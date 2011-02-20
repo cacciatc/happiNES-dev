@@ -130,6 +130,7 @@ public class Assembler implements MessageConsumer {
     throws RunnerException {
 	String binaryPath = "";
 	
+	listing = new StringBuilder();
     for (File file : p65Sources) {
         binaryPath = buildPath + File.separator + file.getName();
         execAsynchronously(getCommandAssembler(assemblerBasePath, includePaths,
@@ -144,6 +145,8 @@ public class Assembler implements MessageConsumer {
 
   boolean firstErrorFound;
   boolean secondErrorFound;
+  
+  StringBuilder listing;
 
   /**
    * Either succeeds or throws a RunnerException fit for public consumption.
@@ -193,6 +196,15 @@ public class Assembler implements MessageConsumer {
       } catch (InterruptedException ignored) { }
     }
 
+    try{
+    	String irs[] = listing.toString().split("Current IR:");
+	    PrintWriter pwr = new PrintWriter(new FileWriter(buildPath + File.separator + "tmp.lis"));
+	    pwr.print(irs[irs.length-1]);
+	    pwr.close();
+    }
+    catch(Exception e){
+    	System.out.println(e);
+    }
     // an error was queued up by message(), barf this back to compile(),
     // which will barf it back to Editor. if you're having trouble
     // discerning the imagery, consider how cows regurgitate their food
@@ -231,7 +243,7 @@ public class Assembler implements MessageConsumer {
         s = s.substring(0, i) + s.substring(i + (buildPath + File.separator).length());
       }
     }
-  
+    listing.append(s);
     // look for error line, which contains file name, line number,
     // and at least the first line of the error message
     String errorFormat = "([\\w\\d_]+.\\w+):(\\d+):\\s*error:\\s*(.*)\\s*";
@@ -259,7 +271,7 @@ public class Assembler implements MessageConsumer {
       }      
     }
     
-    System.err.print(s);
+    //System.err.print(s);
   }
 
   /////////////////////////////////////////////////////////////////////////////
