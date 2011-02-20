@@ -16,4 +16,4 @@ Notes
 -----
 * Not truly cross-platform at the moment.  I am only building and testing on windows, but it is possible to get going on other platforms with a little work.
 * The assembler is [Ophis](https://hkn.eecs.berkeley.edu/~mcmartin/ophis/) which uses the p65 spec.  Copyright 2006-7 Michael Martin
-* The emulator is [vNES](http://www.thatsanderskid.com/programming/vnes/index.html).  Copyright © 2006-2010 Jamie Sanders
+* The emulator is [vNES](http://www.thatsanderskid.com/programming/vnes/index.html).  Copyright 2006-2010 Jamie Sanders

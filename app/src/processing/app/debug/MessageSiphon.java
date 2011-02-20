@@ -59,6 +59,7 @@ public class MessageSiphon implements Runnable {
         // \n is added again because readLine() strips it out
         //EditorConsole.systemOut.println("messaging in");
         consumer.message(currentLine + "\n");
+        
         //EditorConsole.systemOut.println("messaging out");
       }
       //EditorConsole.systemOut.println("messaging thread done");
@@ -88,5 +89,5 @@ public class MessageSiphon implements Runnable {
   
   public Thread getThread() {
     return thread;
-}
+  }
 }
