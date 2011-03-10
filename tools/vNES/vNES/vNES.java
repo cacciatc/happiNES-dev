@@ -120,6 +120,8 @@ public class vNES extends Applet implements Runnable {
             // Start emulation:
             //System.out.println("vNES is now starting the processor.");
             nes.getCpu().beginExecution();
+            
+            nes.cpuMem.mem.notify();
 
         } else {
 
