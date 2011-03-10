@@ -202,9 +202,9 @@ public final class CPU implements Runnable{
 		return (myThread!=null && myThread.isAlive());
 	}
 
-	public void run(){
+	public void run(int cycles){
 		initRun();
-		emulate();
+		emulate(cycles);
 	}
 
 	public synchronized void initRun(){
@@ -212,7 +212,7 @@ public final class CPU implements Runnable{
 	}
 
 	// Emulates cpu instructions until stopped.
-	public void emulate(){
+	public void emulate(int cycles){
 
 
 		// NES Memory
@@ -261,9 +261,12 @@ public final class CPU implements Runnable{
 		boolean asApplet = Globals.appletMode;
 		stopRunning = false;
 
+		int cycleCount = 0;
 		while(true){
 
-
+			if(cycleCount > cycles){
+				mem.wait();
+			}
 			if(stopRunning)break;
 
 			// Check interrupts:
