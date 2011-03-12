@@ -301,9 +301,6 @@ public class Base {
     }
 
     // check for updates
-    if (Preferences.getBoolean("update.check")) {
-      new UpdateCheck(this);
-    }
   }
 
 
