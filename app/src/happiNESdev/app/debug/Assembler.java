@@ -113,10 +113,13 @@ public class Assembler implements MessageConsumer {
    for (File file : sketch.getImportedLibraries()) {
      includePaths.add(file.getPath());
    } */
-
+ 
+   ArrayList l = new ArrayList(1);
+   l.add(new File(buildPath + File.separator +sketch.getName() + ".p65"));
    // run the ophis assembler!
    this.binaryPath = assembleFiles(assemblerBasePath, buildPath, includePaths,
-           		 findFilesInPath(buildPath, "pde", false),
+		   		 l,
+           		 //findFilesInPath(buildPath, sketch.getName() + ".p65", false),
            		 boardPreferences);
    
     return true;
