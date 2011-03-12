@@ -1799,7 +1799,7 @@ public class Editor extends JFrame implements RunnerListener {
     File file = new File(path);
     File parentFile = new File(file.getParent());
     String parentName = parentFile.getName();
-    String pdeName = parentName + ".pde";
+    String pdeName = parentName + ".p65";
     File altFile = new File(file.getParent(), pdeName);
 
     if (pdeName.equals(file.getName())) {
@@ -1811,10 +1811,10 @@ public class Editor extends JFrame implements RunnerListener {
       path = altFile.getAbsolutePath();
       //System.out.println("found alt file in same folder");
 
-    } else if (!path.endsWith(".pde")) {
+    } else if (!path.endsWith(".p65")) {
       Base.showWarning("Bad file selected",
                        "Processing can only open its own sketches\n" +
-                       "and other files ending in .pde", null);
+                       "and other files ending in .p65", null);
       return false;
 
     } else {

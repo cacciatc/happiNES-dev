@@ -317,7 +317,7 @@ public class Sketch {
     renamingCode = true;
     String prompt = (currentIndex == 0) ?
       "New name for sketch:" : "New name for file:";
-    String oldName = (current.isExtension("pde")) ?
+    String oldName = (current.isExtension("p65")) ?
       current.getPrettyName() : current.getFileName();
     editor.status.edit(prompt, oldName);
   }
@@ -497,7 +497,7 @@ public class Sketch {
         }
         // if successful, set base properties for the sketch
 
-        File newMainFile = new File(newFolder, newName + ".pde");
+        File newMainFile = new File(newFolder, newName + ".p65");
         String newMainFilePath = newMainFile.getAbsolutePath();
 
         // having saved everything and renamed the folder and the main .pde,
@@ -862,7 +862,7 @@ public class Sketch {
     }
 
     // save the main tab with its new name
-    File newFile = new File(newFolder, newName + ".pde");
+    File newFile = new File(newFolder, newName + ".p65");
     code[0].saveAs(newFile);
 
     editor.handleOpenUnchecked(newFile.getPath(),
@@ -1778,7 +1778,7 @@ public class Sketch {
    * Returns the default extension for this editor setup.
    */
   public String getDefaultExtension() {
-    return "pde";
+    return "p65";
   }
 
 
