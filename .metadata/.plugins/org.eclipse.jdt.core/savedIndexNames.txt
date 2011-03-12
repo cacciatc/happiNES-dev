@@ -1,0 +1,1 @@
+INDEX VERSION 1.126+C:\cygwin\home\cacciatc\happiNES-dev\.metadata\.plugins\org.eclipse.jdt.core
