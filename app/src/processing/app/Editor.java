@@ -41,8 +41,6 @@ import javax.swing.event.*;
 import javax.swing.text.*;
 import javax.swing.undo.*;
 
-import gnu.io.*;
-
 /**
  * Main editor panel for the Processing Development Environment.
  */
