@@ -1,4 +1,3 @@
-package vNES;
 /*
 vNES
 Copyright © 2006-2010 Jamie Sanders
@@ -202,9 +201,10 @@ public final class CPU implements Runnable{
 		return (myThread!=null && myThread.isAlive());
 	}
 
-	public void run(int cycles){
+	public void run(){
+		Debugger debug = new Debugger(this);
 		initRun();
-		emulate(cycles);
+		emulate(debug);
 	}
 
 	public synchronized void initRun(){
@@ -212,7 +212,7 @@ public final class CPU implements Runnable{
 	}
 
 	// Emulates cpu instructions until stopped.
-	public void emulate(int cycles){
+	public void emulate(Debugger debugger){
 
 
 		// NES Memory
@@ -261,13 +261,15 @@ public final class CPU implements Runnable{
 		boolean asApplet = Globals.appletMode;
 		stopRunning = false;
 
-		int cycleCount = 0;
 		while(true){
 
-			if(cycleCount > cycles){
-				mem.wait();
-			}
+
 			if(stopRunning)break;
+			
+			// ask debugger if we should wait
+			if(debugger.saysToWait(opaddr)){
+				debugger.doesItsThing();
+			}
 
 			// Check interrupts:
 			if(irqRequested){
