@@ -7,7 +7,10 @@ Building
 --------
 You'll need a java development environment setup to build.
 * Download the source.
-* Navigate to the build directory and run ant <linux|windows|macosx>-build.  For example, `ant windows-build`
+* Navigate to the build directory and run
+  `ant <linux|windows|macosx>-build`
+  For example, 
+  `ant windows-build`
 * Check the build folder for your output.
 
 Getting Started
@@ -15,7 +18,9 @@ Getting Started
 * You will need python running on your machine.  Can be downloaded [here](http://www.python.org/getit/).
 * Build from source or download a distribution: [linux](http://www.mediocreradio.com/happiNES-dev/downloads/linux/happiNES-dev-001.zip) or [windows](http://www.mediocreradio.com/happiNES-dev/downloads/windows/happiNES-dev-001.zip).  Sorry, no mac at the moment.
 * Unzip and fire up the happiNES-dev executable.
-* For linux or macos users, you will have to navigate to the tools/assember/Ophis-1.0 folder and run `sudo python setup.py install` to install Ophis.
+* For linux or macos users, you will have to navigate to the tools/assember/Ophis-1.0 folder and run 
+  `sudo python setup.py install` 
+  to install Ophis.
 
 Dependencies
 -----------
