@@ -588,22 +588,6 @@ public class Editor extends JFrame implements RunnerListener {
       });
     sketchMenu.add(item);
 
-//    item = newJMenuItemShift("Verify / Compile (verbose)", 'R');
-//    item.addActionListener(new ActionListener() {
-//        public void actionPerformed(ActionEvent e) {
-//          handleRun(true);
-//        }
-//      });
-//    sketchMenu.add(item);
-
-    item = new JMenuItem("Stop");
-    item.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-          handleStop();
-        }
-      });
-    sketchMenu.add(item);
-
     sketchMenu.addSeparator();
 
     if (importMenu == null) {
@@ -827,15 +811,7 @@ public class Editor extends JFrame implements RunnerListener {
   protected JMenu addInternalTools(JMenu menu) {
     JMenuItem item;
 
-    item = createToolMenuItem("processing.app.tools.AutoFormat");
-    int modifiers = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
-    item.setAccelerator(KeyStroke.getKeyStroke('T', modifiers));
-    menu.add(item);
-
-    //menu.add(createToolMenuItem("processing.app.tools.CreateFont"));
-    //menu.add(createToolMenuItem("processing.app.tools.ColorSelector"));
     menu.add(createToolMenuItem("processing.app.tools.Archiver"));
-    menu.add(createToolMenuItem("processing.app.tools.FixEncoding"));
 
 //    // These are temporary entries while Android mode is being worked out.
 //    // The mode will not be in the tools menu, and won't involve a cmd-key
@@ -2169,10 +2145,6 @@ public class Editor extends JFrame implements RunnerListener {
    */
   public void statusError(Exception e) {
     e.printStackTrace();
-//    if (e == null) {
-//      System.err.println("Editor.statusError() was passed a null exception.");
-//      return;
-//    }
 
     if (e instanceof RunnerException) {
       RunnerException re = (RunnerException) e;
@@ -2242,7 +2214,6 @@ public class Editor extends JFrame implements RunnerListener {
    * Returns the edit popup menu.
    */
   class TextAreaPopup extends JPopupMenu {
-    //String currentDir = System.getProperty("user.dir");
     String referenceFile = null;
 
     JMenuItem cutItem;
