@@ -3,13 +3,21 @@ happiNES-dev
 
 An attempt at bolting on some NES development tools to the Arduino PDE (much like Arduino built on top of Processing).
 
+Building
+--------
+* Download the source.
+* Run ant run <linux|windows|macos>
+
 Getting Started
 ---------------
-Download the correct package for your platform.  Unzip and fire it up.  Starting with the examples under the File->Examples menu is probably the best way to start.
+* Download a distribution.
+* Unzip and fire it up.  
+* Navigate to the tools/assember/Ophis-1.0 folder and run sudo python setup.py install to install Ophis.
 
 Dependencies
 -----------
 * python - Needed to run the assembler.
+* jdk and ant.
 
 
 Notes
