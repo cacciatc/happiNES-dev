@@ -325,8 +325,10 @@
 
     <chmod perm="755" file="linux/work/hardware/tools/avrdude" />
 
-    <copy todir="linux/work" file="linux/dist/" />
-    <chmod perm="755" file="linux/work/" />
+    <copy todir="linux/work">
+      <fileset dir="linux/dist/" />
+    </copy>
+    <chmod perm="755" file="linux/work/happiNES-dev" />
   </target>
   
   <target name="linux-run" depends="linux-build" 
