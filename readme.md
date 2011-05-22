@@ -6,21 +6,17 @@ An attempt at bolting on some NES development tools to the Arduino PDE (much lik
 Building
 --------
 You'll need a java development environment setup to build.
-* Download the source.
-* Navigate to the build directory and run 
-  ant <linux|windows|macosx>-build 
-For example, 
-  ant windows-build
-* Check the build folder for your output.
+
+1. Download the source.
+2. Navigate to the build directory and run `ant <linux|windows|macosx>-build`.  For example, `ant windows-build`
+3. Check the build folder for your output.
 
 Getting Started
 ---------------
-* You will need python running on your machine.  Can be downloaded [here](http://www.python.org/getit/).
-* Build from source or download a distribution: [linux](http://www.mediocreradio.com/happiNES-dev/downloads/linux/happiNES-dev-001.zip) or [windows](http://www.mediocreradio.com/happiNES-dev/downloads/windows/happiNES-dev-001.zip).  Sorry, no mac at the moment.
-* Unzip and fire up the happiNES-dev executable.
-* For linux or macos users, you will have to navigate to the tools/assember/Ophis-1.0 folder and run 
-  sudo python setup.py install
-to install Ophis.
+1. You will need python running on your machine.  Can be downloaded [here](http://www.python.org/getit/).
+2. Build from source or download a distribution: [linux](http://www.mediocreradio.com/happiNES-dev/downloads/linux/happiNES-dev-001.zip) or [windows](http://www.mediocreradio.com/happiNES-dev/downloads/windows/happiNES-dev-001.zip).  Sorry, no mac at the moment.
+3. Unzip and fire up the happiNES-dev executable.
+4. For linux or macos users, you will have to navigate to the tools/assember/Ophis-1.0 folder and run `sudo python setup.py install` to install Ophis.
 
 Dependencies
 -----------
