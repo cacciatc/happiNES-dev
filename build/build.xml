@@ -326,7 +326,7 @@
     <chmod perm="755" file="linux/work/hardware/tools/avrdude" />
 
     <copy todir="linux/work">
-      <fileset dir="linux/dist/" />
+      <fileset dir="linux/dist" />
     </copy>
     <chmod perm="755" file="linux/work/happiNES-dev" />
   </target>
