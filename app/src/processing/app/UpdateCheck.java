@@ -99,8 +99,8 @@ public class UpdateCheck implements Runnable {
       Preferences.set("update.last", String.valueOf(now));
 
       String prompt =
-        "A new version of Arduino is available,\n" +
-        "would you like to visit the Arduino download page?";
+        "A new version of happiNES-dev is available,\n" +
+        "would you like to visit the happiNES-dev download page?";
         
       if (base.activeEditor != null) {
         if (latest > Base.REVISION) {

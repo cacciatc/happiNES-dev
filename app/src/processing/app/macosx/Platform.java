@@ -84,19 +84,19 @@ public class Platform extends processing.app.Platform {
 
 
   public File getSettingsFolder() throws Exception {
-    return new File(getLibraryFolder(), "Arduino");
+    return new File(getLibraryFolder(), "happiNES-dev");
   }
 
 
   public File getDefaultSketchbookFolder() throws Exception {
-    return new File(getDocumentsFolder(), "Arduino");
+    return new File(getDocumentsFolder(), "happiNES-dev");
     /*
     // looking for /Users/blah/Documents/Processing
     try {
       Class clazz = Class.forName("processing.app.BaseMacOS");
       Method m = clazz.getMethod("getDocumentsFolder", new Class[] { });
       String documentsPath = (String) m.invoke(null, new Object[] { });
-      sketchbookFolder = new File(documentsPath, "Arduino");
+      sketchbookFolder = new File(documentsPath, "happiNES-dev");
 
     } catch (Exception e) {
       sketchbookFolder = promptSketchbookLocation();

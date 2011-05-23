@@ -168,7 +168,7 @@ public class Editor extends JFrame implements RunnerListener {
           base.handleActivated(Editor.this);
           // re-add the sub-menus that are shared by all windows
           fileMenu.insert(sketchbookMenu, 2);
-          fileMenu.insert(examplesMenu, 3);
+          //fileMenu.insert(examplesMenu, 3);
           sketchMenu.insert(importMenu, 4);
           toolsMenu.insert(boardsMenu, numTools);
         }
@@ -178,7 +178,7 @@ public class Editor extends JFrame implements RunnerListener {
         public void windowDeactivated(WindowEvent e) {
 //          System.err.println("deactivate");  // not coming through
           fileMenu.remove(sketchbookMenu);
-          fileMenu.remove(examplesMenu);
+          //fileMenu.remove(examplesMenu);
           sketchMenu.remove(importMenu);
           toolsMenu.remove(boardsMenu);
         }
@@ -495,10 +495,10 @@ public class Editor extends JFrame implements RunnerListener {
     fileMenu.add(sketchbookMenu);
 
     if (examplesMenu == null) {
-      examplesMenu = new JMenu("Examples");
-      base.rebuildExamplesMenu(examplesMenu);
+      //examplesMenu = new JMenu("Examples");
+      //base.rebuildExamplesMenu(examplesMenu);
     }
-    fileMenu.add(examplesMenu);
+    //fileMenu.add(examplesMenu);
 
     item = Editor.newJMenuItem("Close", 'W');
     item.addActionListener(new ActionListener() {

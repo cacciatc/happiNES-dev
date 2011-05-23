@@ -110,7 +110,7 @@ public class DiscourseFormat {
       });
 
     editor.statusNotice("Code formatted for " +
-                        (html ? "HTML" : "the Arduino forum ") +
+                        (html ? "HTML" : "the happiNES-dev forum ") +
                         " has been copied to the clipboard.");
   }
 

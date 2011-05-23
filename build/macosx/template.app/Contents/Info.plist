@@ -3,7 +3,7 @@
 <plist version="0.9">
   <dict>
     <key>CFBundleName</key>
-    <string>Arduino</string>
+    <string>happiNES-dev</string>
 
     <!-- all these need to change for new releases -->
     <key>CFBundleGetInfoString</key>
@@ -29,7 +29,7 @@
     <key>CFBundleIconFile</key>
     <string>processing.icns</string>
     <key>CFBundleIdentifier</key> 
-    <string>cc.arduino.Arduino</string>
+    <string>cc.happiNES-dev.happiNES-dev</string>
     <key>CFBundleDocumentTypes</key>
     <array>
       <dict>

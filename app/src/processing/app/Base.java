@@ -225,7 +225,7 @@ public class Base {
     } catch (ClassNotFoundException cnfe) {
       Base.showPlatforms();
       Base.showError("Please install JDK 1.5 or later",
-                     "Arduino requires a full JDK (not just a JRE)\n" +
+                     "happiNES-dev requires a full JDK (not just a JRE)\n" +
                      "to run. Please install JDK 1.5 or later.\n" +
                      "More information can be found in the reference.", cnfe);
     }
@@ -1374,7 +1374,7 @@ public class Base {
         settingsFolder = platform.getSettingsFolder();
       } catch (Exception e) {
         showError("Problem getting data folder",
-                  "Error getting the Arduino data folder.", e);
+                  "Error getting the happiNES-dev data folder.", e);
       }
     }
 
@@ -1382,7 +1382,7 @@ public class Base {
     if (!settingsFolder.exists()) {
       if (!settingsFolder.mkdirs()) {
         showError("Settings issues",
-                  "Arduino cannot run because it could not\n" +
+                  "happiNES-dev cannot run because it could not\n" +
                   "create a folder to store your settings.", null);
       }
     }
