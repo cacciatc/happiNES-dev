@@ -297,14 +297,16 @@ public class Assembler implements MessageConsumer {
 		baseCommandAssembler = new ArrayList(Arrays.asList(new String[] {
 			      assemblerBasePath + "./ophis.sh",
 			      "\"" + sourceName + "\"",
-			      "\"" + binaryName + ".nes\""
+			      "\"" + binaryName + ".nes\"",
+			      "-d"
 			    }));
 	}
 	else{
 		baseCommandAssembler = new ArrayList(Arrays.asList(new String[] {
 			      assemblerBasePath + "./ophis.sh",
 			      "\"" + sourceName + "\"",
-			      "\"" + binaryName + ".nes\""
+			      "\"" + binaryName + ".nes\"",
+			      "-d"
 			    }));
 	}
     return baseCommandAssembler;
