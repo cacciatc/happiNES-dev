@@ -14,7 +14,7 @@ You'll need a java development environment setup to build.
 Getting Started
 ---------------
 1. You will need python running on your machine.  Can be downloaded [here](http://www.python.org/getit/).
-2. Build from source or download a distribution: [linux](http://www.mediocreradio.com/happiNES-dev/downloads/linux/happiNES-dev-001.zip) or [windows](http://www.mediocreradio.com/happiNES-dev/downloads/windows/happiNES-dev-001.zip).  Sorry, no mac at the moment.
+2. Build from source or download for [windows](http://www.mediocreradio.com/happiNES-dev/downloads/windows/happiNES-dev-0002.zip).
 3. Unzip and fire up the happiNES-dev executable.
 4. For linux or macos users, you will have to navigate to the tools/assember/Ophis-1.0 folder and run `sudo python setup.py install` to install Ophis.
 5. I recommend one of Michael Martin's projects: 
